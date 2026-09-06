@@ -13,7 +13,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(180deg, #f3f7ff 0%, #ffffff 100%);
+  background: linear-gradient(180deg,#f3f7ff 0%,#ffffff 100%);
   color: #182033;
   padding-bottom: 90px;
 }
@@ -86,11 +86,6 @@ button {
   color: white;
   font-weight: 700;
   cursor: pointer;
-}
-
-button.secondary {
-  background: #eef0ff;
-  color: #5148d8;
 }
 
 button.danger {
@@ -170,7 +165,7 @@ button.google {
   border-top: 1px solid #e1e5ee;
   display: flex;
   justify-content: space-around;
-  padding: 9px 5px;
+  padding: 9px 2px;
   z-index: 10;
 }
 
@@ -178,8 +173,8 @@ button.google {
   background: transparent;
   color: #6d7587;
   margin: 0;
-  padding: 7px 3px;
-  font-size: 12px;
+  padding: 7px 2px;
+  font-size: 11px;
 }
 
 .nav-btn.active {
@@ -189,7 +184,7 @@ button.google {
 
 .nav-icon {
   display: block;
-  font-size: 21px;
+  font-size: 20px;
   margin-bottom: 2px;
 }
 
@@ -217,10 +212,12 @@ button.google {
   color: #e94c61;
 }
 
-hr {
-  border: none;
-  border-top: 1px solid #e7ebf4;
-  margin: 18px 0;
+label {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #596276;
 }
 </style>
 </head>
@@ -236,7 +233,8 @@ hr {
 
 <div class="container">
 
-<!-- HOME -->
+<!-- ================= HOME ================= -->
+
 <section id="homePage">
 
   <div class="card balance-card">
@@ -261,9 +259,18 @@ hr {
   </div>
 
   <div class="card">
+    <div class="section-title">
+      <h2>Today's Work</h2>
+      <span class="count" id="todayWorkCount">0</span>
+    </div>
+    <div id="homeWork"></div>
+  </div>
+
+  <div class="card">
 
     <div id="loggedOutArea">
       <h2>Account</h2>
+
       <p class="small">
         Sign in to save your information to your account.
       </p>
@@ -276,11 +283,14 @@ hr {
     <div id="loggedInArea" class="hidden">
 
       <div class="user-box">
+
         <img id="userPhoto" class="user-photo">
+
         <div>
           <strong id="userName"></strong>
           <div class="small" id="userEmail"></div>
         </div>
+
       </div>
 
       <button class="danger" onclick="googleLogout()">
@@ -294,50 +304,77 @@ hr {
 </section>
 
 
-<!-- MONEY -->
+<!-- ================= MONEY ================= -->
+
 <section id="moneyPage" class="hidden">
 
   <div class="card balance-card">
-    <div class="subtitle">Current Balance</div>
-    <div class="balance" id="balance">$0.00</div>
+
+    <div class="subtitle">
+      Current Balance
+    </div>
+
+    <div class="balance" id="balance">
+      $0.00
+    </div>
+
   </div>
+
 
   <div class="card">
 
     <h2>Money</h2>
 
-    <!-- Remove Money is now first -->
-    <button class="danger" onclick="removeMoney()">
-      Remove Money
-    </button>
+    <input
+      id="moneyAmount"
+      type="number"
+      step="0.01"
+      placeholder="Amount"
+    >
+
+    <input
+      id="moneyReason"
+      placeholder="Reason"
+    >
 
     <div class="row">
-      <input
-        id="moneyAmount"
-        type="number"
-        step="0.01"
-        placeholder="Amount"
-      >
 
-      <button onclick="addMoney()">
-        Add Money
+      <button
+        class="success"
+        onclick="addMoney()"
+      >
+        + Add Money
       </button>
+
+      <button
+        class="danger"
+        onclick="removeMoney()"
+      >
+        - Remove Money
+      </button>
+
     </div>
 
   </div>
 
+
   <div class="card">
+
     <h2>Transactions</h2>
+
     <div id="transactions"></div>
+
   </div>
 
 </section>
 
 
-<!-- TO-DO -->
+<!-- ================= TO-DO ================= -->
+
 <section id="todoPage" class="hidden">
 
   <div class="card">
+
     <h2>Select Date</h2>
 
     <input
@@ -345,7 +382,9 @@ hr {
       type="date"
       onchange="renderTasks()"
     >
+
   </div>
+
 
   <div class="card">
 
@@ -374,11 +413,17 @@ hr {
 
   </div>
 
+
   <div class="card">
 
     <div class="section-title">
+
       <h2>Tasks</h2>
-      <span class="count" id="taskCount">0</span>
+
+      <span class="count" id="taskCount">
+        0
+      </span>
+
     </div>
 
     <div id="taskList"></div>
@@ -388,7 +433,8 @@ hr {
 </section>
 
 
-<!-- HOMEWORK -->
+<!-- ================= HOMEWORK ================= -->
+
 <section id="homeworkPage" class="hidden">
 
   <div class="card">
@@ -452,8 +498,13 @@ hr {
   <div class="card">
 
     <div class="section-title">
+
       <h2>Homework</h2>
-      <span class="count" id="homeworkCount">0</span>
+
+      <span class="count" id="homeworkCount">
+        0
+      </span>
+
     </div>
 
     <div id="homeworkList"></div>
@@ -462,8 +513,75 @@ hr {
 
 </section>
 
+
+<!-- ================= WORK ================= -->
+
+<section id="workPage" class="hidden">
+
+  <div class="card">
+
+    <h2>Add Work</h2>
+
+    <input
+      id="workName"
+      placeholder="Work / Shift"
+    >
+
+    <input
+      id="workLocation"
+      placeholder="Location (optional)"
+    >
+
+    <label>Date</label>
+
+    <input
+      id="workDate"
+      type="date"
+    >
+
+    <label>Start time</label>
+
+    <input
+      id="workStart"
+      type="time"
+    >
+
+    <label>End time</label>
+
+    <input
+      id="workEnd"
+      type="time"
+    >
+
+    <button onclick="addWork()">
+      Add Work
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="section-title">
+
+      <h2>Work</h2>
+
+      <span class="count" id="workCount">
+        0
+      </span>
+
+    </div>
+
+    <div id="workList"></div>
+
+  </div>
+
+</section>
+
 </div>
 
+
+<!-- ================= NAVIGATION ================= -->
 
 <nav class="bottom-nav">
 
@@ -499,10 +617,18 @@ hr {
     Homework
   </button>
 
+  <button
+    class="nav-btn"
+    onclick="showPage('work',this)"
+  >
+    <span class="nav-icon">💼</span>
+    Work
+  </button>
+
 </nav>
 
 
-<!-- FIREBASE -->
+<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
@@ -518,12 +644,6 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-
-/*
-====================================================
-PASTE YOUR FIREBASE CONFIG HERE
-====================================================
-*/
 
 const firebaseConfig = {
 
@@ -542,31 +662,31 @@ const firebaseConfig = {
 };
 
 
-/*
-====================================================
-FIREBASE SETUP
-====================================================
-*/
+const app =
+  initializeApp(firebaseConfig);
 
-const app = initializeApp(firebaseConfig);
+const auth =
+  getAuth(app);
 
-const auth = getAuth(app);
-
-const provider = new GoogleAuthProvider();
+const provider =
+  new GoogleAuthProvider();
 
 
 window.googleLogin = async function() {
 
   try {
 
-    await signInWithPopup(auth,provider);
+    await signInWithPopup(
+      auth,
+      provider
+    );
 
   } catch(error) {
 
     console.error(error);
 
     alert(
-      "Google sign-in failed. Check the Firebase setup."
+      "Google sign-in failed. Check your Firebase setup."
     );
 
   }
@@ -605,20 +725,18 @@ onAuthStateChanged(auth,(user)=>{
 
     document
       .getElementById("userName")
-      .textContent = user.displayName || "User";
+      .textContent =
+        user.displayName || "User";
 
     document
       .getElementById("userEmail")
-      .textContent = user.email || "";
+      .textContent =
+        user.email || "";
 
     document
       .getElementById("userPhoto")
-      .src = user.photoURL || "";
-
-    /*
-    The account is kept signed in automatically.
-    Your app data remains saved locally.
-    */
+      .src =
+        user.photoURL || "";
 
   } else {
 
@@ -639,34 +757,48 @@ onAuthStateChanged(auth,(user)=>{
 
 <script>
 
-/* ---------------- DATA ---------------- */
+/* ================= DATA ================= */
 
 let balance =
   Number(localStorage.getItem("balance")) || 0;
 
 let transactions =
-  JSON.parse(localStorage.getItem("transactions")) || [];
+  JSON.parse(
+    localStorage.getItem("transactions")
+  ) || [];
 
 let tasks =
-  JSON.parse(localStorage.getItem("tasks")) || [];
+  JSON.parse(
+    localStorage.getItem("tasks")
+  ) || [];
 
 let homework =
-  JSON.parse(localStorage.getItem("homework")) || [];
+  JSON.parse(
+    localStorage.getItem("homework")
+  ) || [];
+
+let work =
+  JSON.parse(
+    localStorage.getItem("work")
+  ) || [];
 
 
-/* ---------------- HELPERS ---------------- */
+/* ================= HELPERS ================= */
 
 function today() {
 
   const d = new Date();
 
-  const year = d.getFullYear();
+  const year =
+    d.getFullYear();
 
   const month =
-    String(d.getMonth()+1).padStart(2,"0");
+    String(d.getMonth()+1)
+      .padStart(2,"0");
 
   const day =
-    String(d.getDate()).padStart(2,"0");
+    String(d.getDate())
+      .padStart(2,"0");
 
   return `${year}-${month}-${day}`;
 }
@@ -674,41 +806,56 @@ function today() {
 
 function formatTime(time) {
 
-  if(!time) return "No time";
+  if(!time)
+    return "No time";
 
-  const parts = time.split(":");
+  const parts =
+    time.split(":");
 
-  let hour = Number(parts[0]);
+  let hour =
+    Number(parts[0]);
 
-  const minute = parts[1];
+  const minute =
+    parts[1];
 
-  const suffix = hour >= 12 ? "PM" : "AM";
+  const suffix =
+    hour >= 12 ? "PM" : "AM";
 
-  hour = hour % 12;
+  hour =
+    hour % 12;
 
-  if(hour === 0) hour = 12;
+  if(hour === 0)
+    hour = 12;
 
   return `${hour}:${minute} ${suffix}`;
 }
 
 
+function formatDate(date) {
+
+  if(!date)
+    return "No date";
+
+  return new Date(
+    `${date}T00:00:00`
+  ).toLocaleDateString([],{
+    month:"short",
+    day:"numeric",
+    year:"numeric"
+  });
+
+}
+
+
 function formatDateTime(date,time) {
 
-  if(!date) return "No due date";
+  if(!date)
+    return "No date";
 
-  const d =
-    new Date(`${date}T${time || "00:00"}`);
+  return `${formatDate(date)}${
+    time ? " at "+formatTime(time) : ""
+  }`;
 
-  const dateText =
-    d.toLocaleDateString([],{
-      month:"short",
-      day:"numeric",
-      year:"numeric"
-    });
-
-  return time
-    ? `${dateText} at ${formatTime(time)}`
-    : dateText;
 }
 
 
@@ -725,12 +872,14 @@ function escapeHTML(text) {
     .replaceAll('"',"&quot;")
 
     .replaceAll("'","&#039;");
+
 }
 
 
-/* ---------------- NAVIGATION ---------------- */
+/* ================= NAVIGATION ================= */
 
-window.showPage = function(page,button) {
+window.showPage =
+function(page,button) {
 
   document
     .querySelectorAll("section")
@@ -749,6 +898,7 @@ window.showPage = function(page,button) {
     );
 
   button.classList.add("active");
+
 
   const titles = {
 
@@ -770,22 +920,30 @@ window.showPage = function(page,button) {
     homework:[
       "Homework",
       "Keep your assignments organized"
+    ],
+
+    work:[
+      "Work",
+      "Keep track of your shifts"
     ]
 
   };
 
+
   document
     .getElementById("pageTitle")
-    .textContent = titles[page][0];
+    .textContent =
+      titles[page][0];
 
   document
     .getElementById("pageSubtitle")
-    .textContent = titles[page][1];
+    .textContent =
+      titles[page][1];
 
 };
 
 
-/* ---------------- MONEY ---------------- */
+/* ================= MONEY ================= */
 
 function saveMoney() {
 
@@ -798,31 +956,67 @@ function saveMoney() {
     "transactions",
     JSON.stringify(transactions)
   );
+
 }
 
 
-window.addMoney = function() {
+window.addMoney =
+function() {
 
   const amount =
     Number(
-      document.getElementById("moneyAmount").value
+      document
+        .getElementById("moneyAmount")
+        .value
     );
 
-  if(!amount || amount <= 0) return;
+  const reason =
+    document
+      .getElementById("moneyReason")
+      .value.trim();
+
+
+  if(!amount || amount <= 0) {
+
+    alert("Enter an amount.");
+
+    return;
+
+  }
+
+
+  if(!reason) {
+
+    alert("Enter a reason for the money.");
+
+    return;
+
+  }
+
 
   balance += amount;
+
 
   transactions.unshift({
 
     amount:amount,
 
-    date:new Date().toLocaleString()
+    reason:reason,
+
+    date:
+      new Date().toLocaleString()
 
   });
 
+
   document
     .getElementById("moneyAmount")
-    .value = "";
+    .value="";
+
+  document
+    .getElementById("moneyReason")
+    .value="";
+
 
   saveMoney();
 
@@ -833,28 +1027,63 @@ window.addMoney = function() {
 };
 
 
-window.removeMoney = function() {
+window.removeMoney =
+function() {
 
   const amount =
     Number(
-      document.getElementById("moneyAmount").value
+      document
+        .getElementById("moneyAmount")
+        .value
     );
 
-  if(!amount || amount <= 0) return;
+  const reason =
+    document
+      .getElementById("moneyReason")
+      .value.trim();
+
+
+  if(!amount || amount <= 0) {
+
+    alert("Enter an amount.");
+
+    return;
+
+  }
+
+
+  if(!reason) {
+
+    alert("Enter a reason for the money.");
+
+    return;
+
+  }
+
 
   balance -= amount;
+
 
   transactions.unshift({
 
     amount:-amount,
 
-    date:new Date().toLocaleString()
+    reason:reason,
+
+    date:
+      new Date().toLocaleString()
 
   });
 
+
   document
     .getElementById("moneyAmount")
-    .value = "";
+    .value="";
+
+  document
+    .getElementById("moneyReason")
+    .value="";
+
 
   saveMoney();
 
@@ -872,8 +1101,11 @@ function renderMoney() {
     .textContent =
       "$"+balance.toFixed(2);
 
+
   const box =
-    document.getElementById("transactions");
+    document
+      .getElementById("transactions");
+
 
   if(!transactions.length) {
 
@@ -881,7 +1113,9 @@ function renderMoney() {
       '<div class="empty">No transactions yet.</div>';
 
     return;
+
   }
+
 
   box.innerHTML =
     transactions.map(t=>{
@@ -905,7 +1139,20 @@ function renderMoney() {
           </div>
 
           <div class="small">
-            ${escapeHTML(t.date)}
+
+            Reason:
+            ${escapeHTML(
+              t.reason || "No reason recorded"
+            )}
+
+          </div>
+
+          <div class="small">
+
+            ${escapeHTML(
+              t.date || ""
+            )}
+
           </div>
 
         </div>
@@ -917,7 +1164,7 @@ function renderMoney() {
 }
 
 
-/* ---------------- TASKS ---------------- */
+/* ================= TASKS ================= */
 
 function saveTasks() {
 
@@ -929,7 +1176,8 @@ function saveTasks() {
 }
 
 
-window.addTask = function() {
+window.addTask =
+function() {
 
   const name =
     document
@@ -946,7 +1194,15 @@ window.addTask = function() {
       .getElementById("taskLocation")
       .value.trim();
 
-  if(!name) return;
+
+  if(!name) {
+
+    alert("Enter a task.");
+
+    return;
+
+  }
+
 
   tasks.push({
 
@@ -955,8 +1211,9 @@ window.addTask = function() {
     name:name,
 
     date:
-      document.getElementById("taskDate").value
-      || today(),
+      document
+        .getElementById("taskDate")
+        .value || today(),
 
     deadline:deadline,
 
@@ -966,9 +1223,19 @@ window.addTask = function() {
 
   });
 
-  document.getElementById("taskName").value="";
-  document.getElementById("taskDeadline").value="";
-  document.getElementById("taskLocation").value="";
+
+  document
+    .getElementById("taskName")
+    .value="";
+
+  document
+    .getElementById("taskDeadline")
+    .value="";
+
+  document
+    .getElementById("taskLocation")
+    .value="";
+
 
   saveTasks();
 
@@ -979,7 +1246,8 @@ window.addTask = function() {
 };
 
 
-window.toggleTask = function(id) {
+window.toggleTask =
+function(id) {
 
   const task =
     tasks.find(t=>t.id===id);
@@ -996,10 +1264,13 @@ window.toggleTask = function(id) {
 };
 
 
-window.deleteTask = function(id) {
+window.deleteTask =
+function(id) {
 
   tasks =
-    tasks.filter(t=>t.id!==id);
+    tasks.filter(
+      t=>t.id!==id
+    );
 
   saveTasks();
 
@@ -1013,32 +1284,46 @@ window.deleteTask = function(id) {
 function renderTasks() {
 
   const selectedDate =
-    document.getElementById("taskDate").value
-    || today();
+    document
+      .getElementById("taskDate")
+      .value || today();
+
 
   const list =
     tasks
 
-      .filter(t=>t.date===selectedDate)
+      .filter(
+        t=>t.date===selectedDate
+      )
 
       .sort((a,b)=>{
 
-        if(!a.deadline) return 1;
+        if(!a.deadline)
+          return 1;
 
-        if(!b.deadline) return -1;
+        if(!b.deadline)
+          return -1;
 
         return a.deadline
-          .localeCompare(b.deadline);
+          .localeCompare(
+            b.deadline
+          );
 
       });
+
 
   document
     .getElementById("taskCount")
     .textContent =
-      list.filter(t=>!t.done).length;
+      list.filter(
+        t=>!t.done
+      ).length;
+
 
   const box =
-    document.getElementById("taskList");
+    document
+      .getElementById("taskList");
+
 
   if(!list.length) {
 
@@ -1048,6 +1333,7 @@ function renderTasks() {
     return;
 
   }
+
 
   box.innerHTML =
     list.map(task=>`
@@ -1101,7 +1387,7 @@ function renderTasks() {
 }
 
 
-/* ---------------- HOMEWORK ---------------- */
+/* ================= HOMEWORK ================= */
 
 function saveHomework() {
 
@@ -1113,7 +1399,8 @@ function saveHomework() {
 }
 
 
-window.addHomework = function() {
+window.addHomework =
+function() {
 
   const name =
     document
@@ -1145,12 +1432,17 @@ window.addHomework = function() {
       .getElementById("homeworkPriority")
       .value;
 
+
   if(!name || !dueDate) {
 
-    alert("Please enter the assignment and due date.");
+    alert(
+      "Please enter the assignment and due date."
+    );
 
     return;
+
   }
+
 
   homework.push({
 
@@ -1164,160 +1456,4 @@ window.addHomework = function() {
 
     dueTime:dueTime,
 
-    doTime:doTime,
-
-    priority:priority,
-
-    done:false
-
-  });
-
-  document.getElementById("homeworkName").value="";
-  document.getElementById("homeworkClass").value="";
-  document.getElementById("homeworkDueDate").value="";
-  document.getElementById("homeworkDueTime").value="";
-  document.getElementById("homeworkDoTime").value="";
-
-  saveHomework();
-
-  renderHomework();
-
-  renderHome();
-
-};
-
-
-window.toggleHomework = function(id) {
-
-  const item =
-    homework.find(h=>h.id===id);
-
-  if(item)
-    item.done=!item.done;
-
-  saveHomework();
-
-  renderHomework();
-
-  renderHome();
-
-};
-
-
-window.deleteHomework = function(id) {
-
-  homework =
-    homework.filter(h=>h.id!==id);
-
-  saveHomework();
-
-  renderHomework();
-
-  renderHome();
-
-};
-
-
-function renderHomework() {
-
-  const list =
-    [...homework].sort((a,b)=>{
-
-      const aDate =
-        `${a.dueDate}T${a.dueTime || "23:59"}`;
-
-      const bDate =
-        `${b.dueDate}T${b.dueTime || "23:59"}`;
-
-      return aDate.localeCompare(bDate);
-
-    });
-
-  document
-    .getElementById("homeworkCount")
-    .textContent =
-      list.filter(h=>!h.done).length;
-
-  const box =
-    document.getElementById("homeworkList");
-
-  if(!list.length) {
-
-    box.innerHTML =
-      '<div class="empty">No homework yet.</div>';
-
-    return;
-
-  }
-
-  box.innerHTML =
-    list.map(item=>`
-
-      <div class="item ${
-        item.done ? "done" : ""
-      }">
-
-        <div class="item-title">
-          ${escapeHTML(item.name)}
-        </div>
-
-        <div class="small">
-          ${
-            escapeHTML(
-              item.className || "No class"
-            )
-          }
-        </div>
-
-        <div class="small">
-          Due:
-          ${formatDateTime(
-            item.dueDate,
-            item.dueTime
-          )}
-        </div>
-
-        ${
-          item.doTime
-          ? `
-            <div class="small">
-              Time to do it:
-              ${formatTime(item.doTime)}
-            </div>
-          `
-          : ""
-        }
-
-        <div class="small">
-          Priority:
-          ${escapeHTML(item.priority)}
-        </div>
-
-        <div class="row">
-
-          <button
-            class="success"
-            onclick="toggleHomework(${item.id})"
-          >
-            ${item.done ? "Undo" : "Complete"}
-          </button>
-
-          <button
-            class="danger"
-            onclick="deleteHomework(${item.id})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* ---------------- HOME ---------------- */
-
-functi
+    doTime:doTime
