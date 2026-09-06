@@ -3,403 +3,866 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#000000">
-<title>My Tracker</title>
+<title>My Day</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif}
-.app{max-width:600px;margin:auto;padding:20px 16px 100px}
-h1{margin:0 0 5px;font-size:30px}
-.subtitle{color:#aaa;margin-bottom:20px}
-.card{background:#111;border:1px solid #292929;border-radius:18px;padding:18px;margin-bottom:15px}
-.balance{font-size:42px;font-weight:bold;margin:8px 0 18px}
-.buttons{display:flex;gap:10px}
-button{border:0;border-radius:13px;padding:14px;color:white;font-size:16px;font-weight:bold;cursor:pointer}
-.add{background:#159447;flex:1}
-.subtract{background:#d73737;flex:1}
-.secondary{background:#222;border:1px solid #444}
-input,select{width:100%;padding:13px;margin:7px 0 10px;background:#080808;color:white;border:1px solid #444;border-radius:11px;font-size:16px}
-.row{display:flex;gap:10px}.row>*{flex:1}
-.item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px solid #292929}
-.item:last-child{border-bottom:0}
-.green{color:#36d477}.red{color:#ff5252}.gray{color:#999;font-size:13px}
-.check{width:21px;height:21px;margin:0;accent-color:#19a955}
-.done{text-decoration:line-through;color:#777}
-.delete{background:none;padding:5px;color:#777;font-size:20px}
-.empty{text-align:center;color:#777;padding:20px}
-nav{position:fixed;bottom:0;left:0;right:0;background:#090909;border-top:1px solid #292929;display:flex;z-index:10}
-nav button{background:none;border-radius:0;color:#888;flex:1;padding:10px 5px;font-size:13px}
-nav button.active{color:#fff}
-.icon{display:block;font-size:22px;margin-bottom:3px}
-.hidden{display:none}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(180deg, #f3f7ff 0%, #ffffff 100%);
+  color: #182033;
+  padding-bottom: 90px;
+}
+
+header {
+  padding: 24px 20px 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.subtitle {
+  color: #68738a;
+  margin-top: 6px;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 10px 16px;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 5px 20px rgba(40, 55, 90, 0.09);
+  border: 1px solid #e7ebf4;
+}
+
+.balance {
+  font-size: 42px;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+.balance-card {
+  background: linear-gradient(135deg, #6c63ff, #8b7cff);
+  color: white;
+  border: none;
+}
+
+.balance-card .subtitle {
+  color: rgba(255,255,255,.8);
+}
+
+input,
+select,
+button {
+  width: 100%;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #d8deea;
+  margin-top: 8px;
+}
+
+button {
+  border: none;
+  background: #6c63ff;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #eef0ff;
+  color: #5148d8;
+}
+
+button.danger {
+  background: #ff5c70;
+}
+
+button.success {
+  background: #22b573;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.row > * {
+  flex: 1;
+}
+
+.item {
+  padding: 14px;
+  border-radius: 14px;
+  background: #f7f8fc;
+  margin-top: 10px;
+  border-left: 5px solid #6c63ff;
+}
+
+.item.done {
+  opacity: .55;
+  text-decoration: line-through;
+}
+
+.item-title {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.small {
+  color: #70798c;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.empty {
+  color: #7b8495;
+  text-align: center;
+  padding: 20px 5px;
+}
+
+.date-picker {
+  background: #fff;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e1e5ee;
+  display: flex;
+  justify-content: space-around;
+  padding: 9px 5px calc(9px + env(safe-area-inset-bottom));
+  z-index: 10;
+}
+
+.nav-btn {
+  background: transparent;
+  color: #6d7587;
+  margin: 0;
+  padding: 7px 3px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+.nav-btn.active {
+  background: #eeedff;
+  color: #5a51dc;
+}
+
+.nav-icon {
+  display: block;
+  font-size: 21px;
+  margin-bottom: 2px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.count {
+  background: #eeedff;
+  color: #5a51dc;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.login-box {
+  text-align: center;
+}
+
+.google-btn {
+  background: white;
+  color: #222;
+  border: 1px solid #d5d9e2;
+}
+
+.hidden {
+  display: none;
+}
+
+.money-positive {
+  color: #22a86b;
+}
+
+.money-negative {
+  color: #e94c61;
+}
 </style>
 </head>
 
 <body>
-<div class="app">
 
-<h1 id="title">Money</h1>
-<div class="subtitle" id="subtitle">Track your money</div>
+<header>
+  <h1 id="pageTitle">Home</h1>
+  <div class="subtitle" id="pageSubtitle">Your day at a glance</div>
+</header>
 
-<!-- MONEY -->
-<section id="moneyTab">
+<div class="container">
 
-<div class="card">
-<div class="gray">CURRENT BALANCE</div>
-<div class="balance" id="balance">$0.00</div>
+  <!-- HOME -->
+  <section id="homePage">
 
-<div class="buttons">
-<button class="add" onclick="showMoneyForm('add')">＋ Add Money</button>
-<button class="subtract" onclick="showMoneyForm('subtract')">− Take Money</button>
+    <div class="card balance-card">
+      <div class="subtitle">Current Balance</div>
+      <div class="balance" id="homeBalance">$0.00</div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">
+        <h2>Today's Tasks</h2>
+        <span class="count" id="todayTaskCount">0</span>
+      </div>
+      <div id="homeTasks"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">
+        <h2>Today's Homework</h2>
+        <span class="count" id="todayHomeworkCount">0</span>
+      </div>
+      <div id="homeHomework"></div>
+    </div>
+
+    <div class="card login-box">
+      <h2>Account</h2>
+      <p class="small">Sign in to connect your account.</p>
+      <button class="google-btn" onclick="googleLogin()">
+        Continue with Google
+      </button>
+    </div>
+
+  </section>
+
+
+  <!-- MONEY -->
+  <section id="moneyPage" class="hidden">
+
+    <div class="card balance-card">
+      <div class="subtitle">Current Balance</div>
+      <div class="balance" id="balance">$0.00</div>
+    </div>
+
+    <div class="card">
+      <h2>Add Money</h2>
+
+      <div class="row">
+        <input id="moneyAmount" type="number" step="0.01" placeholder="Amount">
+        <button onclick="addMoney()">+</button>
+      </div>
+
+      <button class="danger" onclick="removeMoney()">Remove Money</button>
+    </div>
+
+    <div class="card">
+      <h2>Transactions</h2>
+      <div id="transactions"></div>
+    </div>
+
+  </section>
+
+
+  <!-- TODO -->
+  <section id="todoPage" class="hidden">
+
+    <div class="card">
+      <h2>Select Date</h2>
+      <input class="date-picker" id="taskDate" type="date" onchange="renderTasks()">
+    </div>
+
+    <div class="card">
+      <h2>Add Task</h2>
+
+      <input id="taskName" placeholder="Task">
+
+      <input id="taskDeadline" type="time">
+
+      <input id="taskLocation" placeholder="Location (optional)">
+
+      <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <div class="card">
+      <div class="section-title">
+        <h2>Tasks</h2>
+        <span class="count" id="taskCount">0</span>
+      </div>
+
+      <div id="taskList"></div>
+    </div>
+
+  </section>
+
+
+  <!-- HOMEWORK -->
+  <section id="homeworkPage" class="hidden">
+
+    <div class="card">
+      <h2>Select Date</h2>
+      <input class="date-picker" id="homeworkDate" type="date" onchange="renderHomework()">
+    </div>
+
+    <div class="card">
+      <h2>Add Homework</h2>
+
+      <input id="homeworkName" placeholder="Assignment">
+
+      <input id="homeworkClass" placeholder="Class">
+
+      <input id="homeworkDue" type="date">
+
+      <select id="homeworkPriority">
+        <option value="Normal">Normal</option>
+        <option value="High">High</option>
+        <option value="Low">Low</option>
+      </select>
+
+      <button onclick="addHomework()">Add Homework</button>
+    </div>
+
+    <div class="card">
+      <div class="section-title">
+        <h2>Homework</h2>
+        <span class="count" id="homeworkCount">0</span>
+      </div>
+
+      <div id="homeworkList"></div>
+    </div>
+
+  </section>
+
 </div>
-</div>
 
-<div class="card hidden" id="moneyForm">
-<b id="moneyFormTitle">Add Money</b>
-<input id="moneyAmount" type="number" min="0" step="0.01" placeholder="Amount">
-<input id="moneyNote" type="text" placeholder="What was it for?">
 
-<div class="row">
-<button class="add" onclick="saveMoney()">Save</button>
-<button class="secondary" onclick="hideMoneyForm()">Cancel</button>
-</div>
-</div>
+<!-- NAVIGATION -->
+<nav class="bottom-nav">
 
-<div class="card">
-<b>Transactions</b>
-<div id="transactions"></div>
-</div>
+  <button class="nav-btn active" onclick="showPage('home', this)">
+    <span class="nav-icon">⌂</span>
+    Home
+  </button>
 
-</section>
+  <button class="nav-btn" onclick="showPage('money', this)">
+    <span class="nav-icon">$</span>
+    Money
+  </button>
 
-<!-- TO DO -->
-<section id="todoTab" class="hidden">
+  <button class="nav-btn" onclick="showPage('todo', this)">
+    <span class="nav-icon">✓</span>
+    To-Do
+  </button>
 
-<div class="card">
-<b>Add a Task</b>
+  <button class="nav-btn" onclick="showPage('homework', this)">
+    <span class="nav-icon">📚</span>
+    Homework
+  </button>
 
-<input id="taskName" placeholder="What do you need to do?">
-
-<select id="taskDay">
-<option>Any day</option>
-<option>Monday</option>
-<option>Tuesday</option>
-<option>Wednesday</option>
-<option>Thursday</option>
-<option>Friday</option>
-<option>Saturday</option>
-<option>Sunday</option>
-</select>
-
-<input id="taskPlace" placeholder="Where? (optional)">
-
-<button class="add" style="width:100%" onclick="addTask()">＋ Add Task</button>
-</div>
-
-<div class="card">
-<b>To-Do List</b>
-<div id="tasks"></div>
-</div>
-
-</section>
-
-<!-- HOMEWORK -->
-<section id="homeworkTab" class="hidden">
-
-<div class="card">
-<b>Add Homework</b>
-
-<input id="homeworkName" placeholder="Assignment">
-
-<div class="row">
-<input id="homeworkClass" placeholder="Class">
-<input id="homeworkDue" type="date">
-</div>
-
-<select id="homeworkPriority">
-<option>Normal Priority</option>
-<option>High Priority</option>
-<option>Low Priority</option>
-</select>
-
-<button class="add" style="width:100%" onclick="addHomework()">＋ Add Assignment</button>
-</div>
-
-<div class="card">
-<b>Assignments</b>
-<div id="homeworkList"></div>
-</div>
-
-</section>
-
-</div>
-
-<nav>
-<button class="active" onclick="openTab('moneyTab','Money','Track your money',this)">
-<span class="icon">$</span>Money
-</button>
-
-<button onclick="openTab('todoTab','To-Do','Keep track of your tasks',this)">
-<span class="icon">✓</span>To-Do
-</button>
-
-<button onclick="openTab('homeworkTab','Homework','Keep track of assignments',this)">
-<span class="icon">▤</span>Homework
-</button>
 </nav>
 
+
 <script>
-let transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
-let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-let homework = JSON.parse(localStorage.getItem("homework") || "[]");
 
-let moneyMode = "add";
+let balance = Number(localStorage.getItem("balance")) || 0;
 
-function saveData(){
-localStorage.setItem("transactions",JSON.stringify(transactions));
-localStorage.setItem("tasks",JSON.stringify(tasks));
-localStorage.setItem("homework",JSON.stringify(homework));
+let transactions =
+  JSON.parse(localStorage.getItem("transactions")) || [];
+
+let tasks =
+  JSON.parse(localStorage.getItem("tasks")) || [];
+
+let homework =
+  JSON.parse(localStorage.getItem("homework")) || [];
+
+
+function today() {
+  return new Date().toISOString().split("T")[0];
 }
 
-function openTab(tab,title,subtitle,button){
-document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
-document.getElementById(tab).classList.remove("hidden");
 
-document.getElementById("title").textContent=title;
-document.getElementById("subtitle").textContent=subtitle;
+/* ---------------- NAVIGATION ---------------- */
 
-document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
-button.classList.add("active");
+function showPage(page, button) {
+
+  document.querySelectorAll("section").forEach(section => {
+    section.classList.add("hidden");
+  });
+
+  document.getElementById(page + "Page").classList.remove("hidden");
+
+  document.querySelectorAll(".nav-btn").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  const titles = {
+    home: ["Home", "Your day at a glance"],
+    money: ["Money", "Track your balance"],
+    todo: ["To-Do", "Stay on top of your tasks"],
+    homework: ["Homework", "Keep your assignments organized"]
+  };
+
+  document.getElementById("pageTitle").textContent = titles[page][0];
+  document.getElementById("pageSubtitle").textContent = titles[page][1];
 }
 
-function showMoneyForm(mode){
-moneyMode=mode;
-document.getElementById("moneyForm").classList.remove("hidden");
-document.getElementById("moneyFormTitle").textContent=
-mode==="add" ? "Add Money" : "Take Money";
-document.getElementById("moneyAmount").value="";
-document.getElementById("moneyNote").value="";
-document.getElementById("moneyAmount").focus();
+
+/* ---------------- MONEY ---------------- */
+
+function saveMoney() {
+  localStorage.setItem("balance", balance);
+  localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
-function hideMoneyForm(){
-document.getElementById("moneyForm").classList.add("hidden");
+function addMoney() {
+
+  const amount = Number(document.getElementById("moneyAmount").value);
+
+  if (!amount || amount <= 0) return;
+
+  balance += amount;
+
+  transactions.unshift({
+    amount: amount,
+    date: new Date().toLocaleString()
+  });
+
+  document.getElementById("moneyAmount").value = "";
+
+  saveMoney();
+  renderMoney();
+  renderHome();
 }
 
-function saveMoney(){
-let amount=parseFloat(document.getElementById("moneyAmount").value);
-let note=document.getElementById("moneyNote").value.trim();
+function removeMoney() {
 
-if(!amount || amount<=0){
-alert("Enter an amount.");
-return;
+  const amount = Number(document.getElementById("moneyAmount").value);
+
+  if (!amount || amount <= 0) return;
+
+  balance -= amount;
+
+  transactions.unshift({
+    amount: -amount,
+    date: new Date().toLocaleString()
+  });
+
+  document.getElementById("moneyAmount").value = "";
+
+  saveMoney();
+  renderMoney();
+  renderHome();
 }
 
-if(!note) note="No description";
+function renderMoney() {
 
-transactions.unshift({
-amount:moneyMode==="add"?amount:-amount,
-note:note,
-date:new Date().toLocaleDateString()
-});
+  document.getElementById("balance").textContent =
+    "$" + balance.toFixed(2);
 
-saveData();
+  const box = document.getElementById("transactions");
+
+  if (!transactions.length) {
+    box.innerHTML = '<div class="empty">No transactions yet.</div>';
+    return;
+  }
+
+  box.innerHTML = transactions.map((t, i) => {
+
+    const positive = t.amount >= 0;
+
+    return `
+      <div class="item">
+        <div class="item-title ${positive ? "money-positive" : "money-negative"}">
+          ${positive ? "+" : "-"}$${Math.abs(t.amount).toFixed(2)}
+        </div>
+        <div class="small">${t.date}</div>
+      </div>
+    `;
+
+  }).join("");
+}
+
+
+/* ---------------- TASKS ---------------- */
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function addTask() {
+
+  const name = document.getElementById("taskName").value.trim();
+  const deadline = document.getElementById("taskDeadline").value;
+  const location = document.getElementById("taskLocation").value.trim();
+
+  if (!name) return;
+
+  tasks.push({
+    id: Date.now(),
+    name,
+    date: document.getElementById("taskDate").value || today(),
+    deadline,
+    location,
+    done: false
+  });
+
+  document.getElementById("taskName").value = "";
+  document.getElementById("taskDeadline").value = "";
+  document.getElementById("taskLocation").value = "";
+
+  saveTasks();
+  renderTasks();
+  renderHome();
+}
+
+function toggleTask(id) {
+
+  const task = tasks.find(t => t.id === id);
+
+  if (task) task.done = !task.done;
+
+  saveTasks();
+  renderTasks();
+  renderHome();
+}
+
+function deleteTask(id) {
+
+  tasks = tasks.filter(t => t.id !== id);
+
+  saveTasks();
+  renderTasks();
+  renderHome();
+}
+
+function formatTime(time) {
+
+  if (!time) return "No deadline";
+
+  const [hour, minute] = time.split(":");
+
+  const d = new Date();
+
+  d.setHours(hour, minute);
+
+  return d.toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit"
+  });
+}
+
+function renderTasks() {
+
+  const selectedDate =
+    document.getElementById("taskDate").value || today();
+
+  const list = tasks
+    .filter(t => t.date === selectedDate)
+    .sort((a, b) => {
+
+      if (!a.deadline) return 1;
+      if (!b.deadline) return -1;
+
+      return a.deadline.localeCompare(b.deadline);
+    });
+
+  document.getElementById("taskCount").textContent =
+    list.filter(t => !t.done).length;
+
+  const box = document.getElementById("taskList");
+
+  if (!list.length) {
+    box.innerHTML = '<div class="empty">No tasks for this date.</div>';
+    return;
+  }
+
+  box.innerHTML = list.map(task => `
+
+    <div class="item ${task.done ? "done" : ""}">
+
+      <div class="item-title">
+        ${escapeHTML(task.name)}
+      </div>
+
+      <div class="small">
+        Deadline: ${formatTime(task.deadline)}
+      </div>
+
+      ${task.location
+        ? `<div class="small">Location: ${escapeHTML(task.location)}</div>`
+        : ""}
+
+      <div class="row">
+        <button class="success"
+          onclick="toggleTask(${task.id})">
+          ${task.done ? "Undo" : "Complete"}
+        </button>
+
+        <button class="danger"
+          onclick="deleteTask(${task.id})">
+          Delete
+        </button>
+      </div>
+
+    </div>
+
+  `).join("");
+}
+
+
+/* ---------------- HOMEWORK ---------------- */
+
+function saveHomework() {
+  localStorage.setItem("homework", JSON.stringify(homework));
+}
+
+function addHomework() {
+
+  const name =
+    document.getElementById("homeworkName").value.trim();
+
+  const className =
+    document.getElementById("homeworkClass").value.trim();
+
+  const due =
+    document.getElementById("homeworkDue").value;
+
+  const priority =
+    document.getElementById("homeworkPriority").value;
+
+  if (!name || !due) return;
+
+  homework.push({
+    id: Date.now(),
+    name,
+    className,
+    due,
+    priority,
+    done: false
+  });
+
+  document.getElementById("homeworkName").value = "";
+  document.getElementById("homeworkClass").value = "";
+  document.getElementById("homeworkDue").value = "";
+
+  saveHomework();
+  renderHomework();
+  renderHome();
+}
+
+function toggleHomework(id) {
+
+  const item = homework.find(h => h.id === id);
+
+  if (item) item.done = !item.done;
+
+  saveHomework();
+  renderHomework();
+  renderHome();
+}
+
+function deleteHomework(id) {
+
+  homework = homework.filter(h => h.id !== id);
+
+  saveHomework();
+  renderHomework();
+  renderHome();
+}
+
+function renderHomework() {
+
+  const selectedDate =
+    document.getElementById("homeworkDate").value || today();
+
+  const list = homework
+    .filter(h => h.due === selectedDate)
+    .sort((a, b) =>
+      a.due.localeCompare(b.due)
+    );
+
+  document.getElementById("homeworkCount").textContent =
+    list.filter(h => !h.done).length;
+
+  const box =
+    document.getElementById("homeworkList");
+
+  if (!list.length) {
+    box.innerHTML =
+      '<div class="empty">No homework due this date.</div>';
+    return;
+  }
+
+  box.innerHTML = list.map(item => `
+
+    <div class="item ${item.done ? "done" : ""}">
+
+      <div class="item-title">
+        ${escapeHTML(item.name)}
+      </div>
+
+      <div class="small">
+        ${escapeHTML(item.className || "No class")}
+      </div>
+
+      <div class="small">
+        Due: ${item.due}
+      </div>
+
+      <div class="small">
+        Priority: ${item.priority}
+      </div>
+
+      <div class="row">
+
+        <button class="success"
+          onclick="toggleHomework(${item.id})">
+          ${item.done ? "Undo" : "Complete"}
+        </button>
+
+        <button class="danger"
+          onclick="deleteHomework(${item.id})">
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+}
+
+
+/* ---------------- HOME DASHBOARD ---------------- */
+
+function renderHome() {
+
+  document.getElementById("homeBalance").textContent =
+    "$" + balance.toFixed(2);
+
+  const todaysTasks = tasks
+    .filter(t => t.date === today())
+    .sort((a, b) => {
+
+      if (!a.deadline) return 1;
+      if (!b.deadline) return -1;
+
+      return a.deadline.localeCompare(b.deadline);
+    });
+
+  const todaysHomework = homework
+    .filter(h => h.due === today())
+    .sort((a, b) => a.due.localeCompare(b.due));
+
+  document.getElementById("todayTaskCount").textContent =
+    todaysTasks.filter(t => !t.done).length;
+
+  document.getElementById("todayHomeworkCount").textContent =
+    todaysHomework.filter(h => !h.done).length;
+
+
+  const taskBox = document.getElementById("homeTasks");
+
+  if (!todaysTasks.length) {
+
+    taskBox.innerHTML =
+      '<div class="empty">Nothing scheduled for today.</div>';
+
+  } else {
+
+    taskBox.innerHTML = todaysTasks.map(t => `
+
+      <div class="item ${t.done ? "done" : ""}">
+        <div class="item-title">${escapeHTML(t.name)}</div>
+        <div class="small">
+          Deadline: ${formatTime(t.deadline)}
+        </div>
+      </div>
+
+    `).join("");
+  }
+
+
+  const homeworkBox =
+    document.getElementById("homeHomework");
+
+  if (!todaysHomework.length) {
+
+    homeworkBox.innerHTML =
+      '<div class="empty">No homework due today.</div>';
+
+  } else {
+
+    homeworkBox.innerHTML = todaysHomework.map(h => `
+
+      <div class="item ${h.done ? "done" : ""}">
+        <div class="item-title">${escapeHTML(h.name)}</div>
+        <div class="small">
+          ${escapeHTML(h.className || "No class")}
+        </div>
+      </div>
+
+    `).join("");
+  }
+}
+
+
+/* ---------------- GOOGLE LOGIN ---------------- */
+
+function googleLogin() {
+
+  alert(
+    "Google Sign-In still needs to be connected to a Google OAuth client. We will configure this after the app itself is working."
+  );
+}
+
+
+/* ---------------- SECURITY ---------------- */
+
+function escapeHTML(text) {
+
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+/* ---------------- STARTUP ---------------- */
+
+document.getElementById("taskDate").value = today();
+document.getElementById("homeworkDate").value = today();
+
 renderMoney();
-hideMoneyForm();
-}
-
-function renderMoney(){
-let balance=transactions.reduce((total,t)=>total+t.amount,0);
-
-document.getElementById("balance").textContent=
-(balance<0?"-":"")+"$"+Math.abs(balance).toFixed(2);
-
-let box=document.getElementById("transactions");
-
-if(transactions.length===0){
-box.innerHTML='<div class="empty">No transactions yet.</div>';
-return;
-}
-
-box.innerHTML=transactions.map((t,i)=>`
-<div class="item">
-<div>
-<b>${escapeHTML(t.note)}</b>
-<div class="gray">${t.date}</div>
-</div>
-
-<div class="${t.amount>=0?"green":"red"}">
-${t.amount>=0?"+":"-"}$${Math.abs(t.amount).toFixed(2)}
-<button class="delete" onclick="deleteTransaction(${i})">×</button>
-</div>
-</div>
-`).join("");
-}
-
-function deleteTransaction(i){
-if(confirm("Delete this transaction?")){
-transactions.splice(i,1);
-saveData();
-renderMoney();
-}
-}
-
-function addTask(){
-let name=document.getElementById("taskName").value.trim();
-let day=document.getElementById("taskDay").value;
-let place=document.getElementById("taskPlace").value.trim();
-
-if(!name){
-alert("Enter a task.");
-return;
-}
-
-tasks.unshift({
-name:name,
-day:day,
-place:place,
-done:false
-});
-
-document.getElementById("taskName").value="";
-document.getElementById("taskPlace").value="";
-
-saveData();
-renderTasks();
-}
-
-function renderTasks(){
-let box=document.getElementById("tasks");
-
-if(tasks.length===0){
-box.innerHTML='<div class="empty">No tasks yet.</div>';
-return;
-}
-
-box.innerHTML=tasks.map((t,i)=>`
-<div class="item">
-<div style="display:flex;gap:9px;align-items:center">
-<input class="check" type="checkbox"
-${t.done?"checked":""}
-onchange="toggleTask(${i})">
-
-<div class="${t.done?"done":""}">
-<b>${escapeHTML(t.name)}</b>
-<div class="gray">
-${t.day}${t.place?" · "+escapeHTML(t.place):""}
-</div>
-</div>
-</div>
-
-<button class="delete" onclick="deleteTask(${i})">×</button>
-</div>
-`).join("");
-}
-
-function toggleTask(i){
-tasks[i].done=!tasks[i].done;
-saveData();
-renderTasks();
-}
-
-function deleteTask(i){
-if(confirm("Delete this task?")){
-tasks.splice(i,1);
-saveData();
-renderTasks();
-}
-}
-
-function addHomework(){
-let name=document.getElementById("homeworkName").value.trim();
-let cls=document.getElementById("homeworkClass").value.trim();
-let due=document.getElementById("homeworkDue").value;
-let priority=document.getElementById("homeworkPriority").value;
-
-if(!name){
-alert("Enter an assignment.");
-return;
-}
-
-homework.push({
-name:name,
-className:cls,
-due:due,
-priority:priority,
-done:false
-});
-
-document.getElementById("homeworkName").value="";
-document.getElementById("homeworkClass").value="";
-document.getElementById("homeworkDue").value="";
-
-saveData();
-renderHomework();
-}
-
-function renderHomework(){
-let box=document.getElementById("homeworkList");
-
-homework.sort((a,b)=>{
-if(a.done!==b.done)return a.done-b.done;
-if(!a.due)return 1;
-if(!b.due)return -1;
-return a.due.localeCompare(b.due);
-});
-
-if(homework.length===0){
-box.innerHTML='<div class="empty">No assignments yet.</div>';
-return;
-}
-
-box.innerHTML=homework.map((h,i)=>`
-<div class="item">
-<div style="display:flex;gap:9px;align-items:center">
-<input class="check" type="checkbox"
-${h.done?"checked":""}
-onchange="toggleHomework(${i})">
-
-<div class="${h.done?"done":""}">
-<b>${escapeHTML(h.name)}</b>
-<div class="gray">
-${h.className?escapeHTML(h.className)+" · ":""}
-${h.due?"Due "+h.due+" · ":""}
-${escapeHTML(h.priority)}
-</div>
-</div>
-</div>
-
-<button class="delete" onclick="deleteHomework(${i})">×</button>
-</div>
-`).join("");
-}
-
-function toggleHomework(i){
-homework[i].done=!homework[i].done;
-saveData();
-renderHomework();
-}
-
-function deleteHomework(i){
-if(confirm("Delete this assignment?")){
-homework.splice(i,1);
-saveData();
-renderHomework();
-}
-}
-
-function escapeHTML(text){
-return String(text)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
-}
-
-renderMoney();
 renderTasks();
 renderHomework();
+renderHome();
+
 </script>
 
 </body>
