@@ -12,212 +12,186 @@
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(180deg,#f3f7ff 0%,#ffffff 100%);
-  color: #182033;
+  font-family: Arial, sans-serif;
+  background: #f4f7ff;
+  color: #202638;
   padding-bottom: 90px;
 }
 
 header {
-  padding: 24px 20px 12px;
+  background: white;
+  padding: 22px 18px 14px;
+  text-align: center;
+  border-bottom: 1px solid #e3e7f2;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  margin: 6px 0 0;
+  color: #687085;
+}
+
+.page {
+  display: none;
+  padding: 18px;
   max-width: 700px;
   margin: auto;
 }
 
-h1 {
-  margin: 0;
-  font-size: 30px;
+.page.active {
+  display: block;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 15px rgba(30, 40, 70, 0.08);
 }
 
 h2 {
   margin-top: 0;
 }
 
-.subtitle {
-  color: #68738a;
-  margin-top: 6px;
-}
-
-.container {
-  max-width: 700px;
-  margin: auto;
-  padding: 10px 16px;
-}
-
-.card {
-  background: white;
-  border-radius: 20px;
-  padding: 18px;
-  margin-bottom: 16px;
-  box-shadow: 0 5px 20px rgba(40,55,90,.09);
-  border: 1px solid #e7ebf4;
-}
-
-.balance-card {
-  background: linear-gradient(135deg,#6c63ff,#8b7cff);
-  color: white;
-  border: none;
-}
-
 .balance {
-  font-size: 42px;
-  font-weight: 800;
+  font-size: 38px;
+  font-weight: bold;
   margin: 10px 0;
-}
-
-.balance-card .subtitle {
-  color: rgba(255,255,255,.8);
 }
 
 input,
 select,
 button {
   width: 100%;
+  padding: 13px;
+  margin: 6px 0;
   border-radius: 12px;
-  padding: 12px;
+  border: 1px solid #d9deeb;
   font-size: 16px;
-  border: 1px solid #d8deea;
-  margin-top: 8px;
 }
 
 button {
   border: none;
-  background: #6c63ff;
+  background: #6575f5;
   color: white;
-  font-weight: 700;
+  font-weight: bold;
   cursor: pointer;
 }
 
-button.danger {
-  background: #ff5c70;
+button:active {
+  transform: scale(0.98);
 }
 
-button.success {
-  background: #22b573;
-}
-
-button.google {
-  background: white;
-  color: #222;
-  border: 1px solid #d4d9e3;
-}
-
-.row {
+.money-buttons {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
-.row > * {
+.money-buttons button {
   flex: 1;
 }
 
+.add {
+  background: #39b875;
+}
+
+.remove {
+  background: #ef6262;
+}
+
 .item {
-  padding: 14px;
+  border: 1px solid #e2e6f0;
   border-radius: 14px;
-  background: #f7f8fc;
+  padding: 13px;
   margin-top: 10px;
-  border-left: 5px solid #6c63ff;
 }
 
 .item.done {
-  opacity: .55;
+  opacity: 0.55;
   text-decoration: line-through;
 }
 
 .item-title {
-  font-weight: 700;
+  font-weight: bold;
   font-size: 17px;
 }
 
 .small {
-  color: #70798c;
+  color: #687085;
   font-size: 14px;
   margin-top: 4px;
 }
 
-.empty {
-  color: #7b8495;
-  text-align: center;
-  padding: 20px 5px;
-}
-
-.section-title {
+.item-buttons {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.count {
-  background: #eeedff;
-  color: #5a51dc;
-  border-radius: 20px;
-  padding: 5px 10px;
-  font-size: 13px;
-  font-weight: 700;
+.item-buttons button {
+  margin: 0;
+  padding: 9px;
+  font-size: 14px;
 }
 
-.bottom-nav {
+.delete {
+  background: #ef6262;
+}
+
+.complete {
+  background: #39b875;
+}
+
+.empty {
+  text-align: center;
+  color: #7b8395;
+  padding: 15px;
+}
+
+nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   background: white;
-  border-top: 1px solid #e1e5ee;
+  border-top: 1px solid #dfe4ef;
   display: flex;
   justify-content: space-around;
-  padding: 9px 2px;
-  z-index: 10;
+  padding: 8px 4px;
+  z-index: 100;
 }
 
-.nav-btn {
+nav button {
   background: transparent;
-  color: #6d7587;
+  color: #657084;
   margin: 0;
-  padding: 7px 2px;
-  font-size: 11px;
+  padding: 8px 2px;
+  font-size: 12px;
 }
 
-.nav-btn.active {
-  background: #eeedff;
-  color: #5a51dc;
+nav button.active {
+  color: #6575f5;
+  font-weight: bold;
 }
 
 .nav-icon {
   display: block;
-  font-size: 20px;
+  font-size: 21px;
   margin-bottom: 2px;
 }
 
-.user-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.section-title {
+  margin-top: 22px;
 }
 
-.user-photo {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.money-positive {
-  color: #22a86b;
-}
-
-.money-negative {
-  color: #e94c61;
-}
-
-label {
-  display: block;
-  margin-top: 12px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #596276;
+.time {
+  font-weight: bold;
+  color: #6575f5;
 }
 </style>
 </head>
@@ -225,105 +199,43 @@ label {
 <body>
 
 <header>
-  <h1 id="pageTitle">Home</h1>
-  <div class="subtitle" id="pageSubtitle">
-    Your day at a glance
-  </div>
+  <h1>My Day</h1>
+  <p id="todayText"></p>
 </header>
 
-<div class="container">
+<!-- HOME -->
+<section id="home" class="page active">
 
-<!-- ================= HOME ================= -->
-
-<section id="homePage">
-
-  <div class="card balance-card">
-    <div class="subtitle">Current Balance</div>
+  <div class="card">
+    <h2>Balance</h2>
     <div class="balance" id="homeBalance">$0.00</div>
   </div>
 
   <div class="card">
-    <div class="section-title">
-      <h2>Today's Tasks</h2>
-      <span class="count" id="todayTaskCount">0</span>
-    </div>
+    <h2>Today's Tasks</h2>
     <div id="homeTasks"></div>
   </div>
 
   <div class="card">
-    <div class="section-title">
-      <h2>Today's Homework</h2>
-      <span class="count" id="todayHomeworkCount">0</span>
-    </div>
+    <h2>Today's Homework</h2>
     <div id="homeHomework"></div>
   </div>
 
   <div class="card">
-    <div class="section-title">
-      <h2>Today's Work</h2>
-      <span class="count" id="todayWorkCount">0</span>
-    </div>
+    <h2>Today's Work</h2>
     <div id="homeWork"></div>
-  </div>
-
-  <div class="card">
-
-    <div id="loggedOutArea">
-      <h2>Account</h2>
-
-      <p class="small">
-        Sign in to save your information to your account.
-      </p>
-
-      <button class="google" onclick="googleLogin()">
-        Sign in with Google
-      </button>
-    </div>
-
-    <div id="loggedInArea" class="hidden">
-
-      <div class="user-box">
-
-        <img id="userPhoto" class="user-photo">
-
-        <div>
-          <strong id="userName"></strong>
-          <div class="small" id="userEmail"></div>
-        </div>
-
-      </div>
-
-      <button class="danger" onclick="googleLogout()">
-        Sign Out
-      </button>
-
-    </div>
-
   </div>
 
 </section>
 
 
-<!-- ================= MONEY ================= -->
-
-<section id="moneyPage" class="hidden">
-
-  <div class="card balance-card">
-
-    <div class="subtitle">
-      Current Balance
-    </div>
-
-    <div class="balance" id="balance">
-      $0.00
-    </div>
-
-  </div>
-
+<!-- MONEY -->
+<section id="money" class="page">
 
   <div class="card">
-
     <h2>Money</h2>
+
+    <div class="balance" id="moneyBalance">$0.00</div>
 
     <input
       id="moneyAmount"
@@ -334,293 +246,140 @@ label {
 
     <input
       id="moneyReason"
+      type="text"
       placeholder="Reason"
     >
 
-    <div class="row">
-
-      <button
-        class="success"
-        onclick="addMoney()"
-      >
-        + Add Money
-      </button>
-
-      <button
-        class="danger"
-        onclick="removeMoney()"
-      >
-        - Remove Money
-      </button>
-
+    <div class="money-buttons">
+      <button class="add" onclick="addMoney()">+ Add Money</button>
+      <button class="remove" onclick="removeMoney()">− Remove Money</button>
     </div>
-
   </div>
 
-
   <div class="card">
-
     <h2>Transactions</h2>
-
     <div id="transactions"></div>
-
   </div>
 
 </section>
 
 
-<!-- ================= TO-DO ================= -->
-
-<section id="todoPage" class="hidden">
-
-  <div class="card">
-
-    <h2>Select Date</h2>
-
-    <input
-      id="taskDate"
-      type="date"
-      onchange="renderTasks()"
-    >
-
-  </div>
-
+<!-- TO DO -->
+<section id="todo" class="page">
 
   <div class="card">
-
     <h2>Add Task</h2>
 
-    <input
-      id="taskName"
-      placeholder="Task"
-    >
-
-    <label>Deadline</label>
-
-    <input
-      id="taskDeadline"
-      type="time"
-    >
-
-    <input
-      id="taskLocation"
-      placeholder="Location (optional)"
-    >
-
-    <button onclick="addTask()">
-      Add Task
-    </button>
-
-  </div>
-
-
-  <div class="card">
-
-    <div class="section-title">
-
-      <h2>Tasks</h2>
-
-      <span class="count" id="taskCount">
-        0
-      </span>
-
-    </div>
-
-    <div id="taskList"></div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= HOMEWORK ================= -->
-
-<section id="homeworkPage" class="hidden">
-
-  <div class="card">
-
-    <h2>Add Homework</h2>
-
-    <input
-      id="homeworkName"
-      placeholder="Assignment"
-    >
-
-    <input
-      id="homeworkClass"
-      placeholder="Class"
-    >
-
-    <label>Due date</label>
-
-    <input
-      id="homeworkDueDate"
-      type="date"
-    >
-
-    <label>Due time</label>
-
-    <input
-      id="homeworkDueTime"
-      type="time"
-    >
-
-    <label>Time to do it</label>
-
-    <input
-      id="homeworkDoTime"
-      type="time"
-    >
-
-    <select id="homeworkPriority">
-
-      <option value="Normal">
-        Normal priority
-      </option>
-
-      <option value="High">
-        High priority
-      </option>
-
-      <option value="Low">
-        Low priority
-      </option>
-
-    </select>
-
-    <button onclick="addHomework()">
-      Add Homework
-    </button>
-
-  </div>
-
-
-  <div class="card">
-
-    <div class="section-title">
-
-      <h2>Homework</h2>
-
-      <span class="count" id="homeworkCount">
-        0
-      </span>
-
-    </div>
-
-    <div id="homeworkList"></div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= WORK ================= -->
-
-<section id="workPage" class="hidden">
-
-  <div class="card">
-
-    <h2>Add Work</h2>
-
-    <input
-      id="workName"
-      placeholder="Work / Shift"
-    >
-
-    <input
-      id="workLocation"
-      placeholder="Location (optional)"
-    >
+    <input id="taskName" type="text" placeholder="Task">
 
     <label>Date</label>
+    <input id="taskDate" type="date">
 
-    <input
-      id="workDate"
-      type="date"
-    >
+    <input id="taskDeadline" type="time">
 
-    <label>Start time</label>
+    <input id="taskPlace" type="text" placeholder="Location">
 
-    <input
-      id="workStart"
-      type="time"
-    >
-
-    <label>End time</label>
-
-    <input
-      id="workEnd"
-      type="time"
-    >
-
-    <button onclick="addWork()">
-      Add Work
-    </button>
-
+    <button onclick="addTask()">Add Task</button>
   </div>
 
-
   <div class="card">
-
-    <div class="section-title">
-
-      <h2>Work</h2>
-
-      <span class="count" id="workCount">
-        0
-      </span>
-
-    </div>
-
-    <div id="workList"></div>
-
+    <h2>To-Do List</h2>
+    <div id="tasks"></div>
   </div>
 
 </section>
 
-</div>
+
+<!-- HOMEWORK -->
+<section id="homework" class="page">
+
+  <div class="card">
+    <h2>Add Homework</h2>
+
+    <input id="homeworkName" type="text" placeholder="Assignment">
+
+    <input id="homeworkClass" type="text" placeholder="Class">
+
+    <label>Due date</label>
+    <input id="homeworkDate" type="date">
+
+    <label>Due time</label>
+    <input id="homeworkDueTime" type="time">
+
+    <label>Time to do it</label>
+    <input id="homeworkDoTime" type="time">
+
+    <select id="homeworkPriority">
+      <option value="Normal">Normal priority</option>
+      <option value="High">High priority</option>
+      <option value="Low">Low priority</option>
+    </select>
+
+    <button onclick="addHomework()">Add Homework</button>
+  </div>
+
+  <div class="card">
+    <h2>Homework</h2>
+    <div id="homeworkList"></div>
+  </div>
+
+</section>
 
 
-<!-- ================= NAVIGATION ================= -->
+<!-- WORK -->
+<section id="work" class="page">
 
-<nav class="bottom-nav">
+  <div class="card">
+    <h2>Add Work</h2>
 
-  <button
-    class="nav-btn active"
-    onclick="showPage('home',this)"
-  >
+    <input id="workName" type="text" placeholder="Job / Shift">
+
+    <input id="workLocation" type="text" placeholder="Location">
+
+    <label>Date</label>
+    <input id="workDate" type="date">
+
+    <label>Start time</label>
+    <input id="workStart" type="time">
+
+    <label>End time</label>
+    <input id="workEnd" type="time">
+
+    <button onclick="addWork()">Add Work</button>
+  </div>
+
+  <div class="card">
+    <h2>Work</h2>
+    <div id="workList"></div>
+  </div>
+
+</section>
+
+
+<!-- NAVIGATION -->
+<nav>
+
+  <button id="nav-home" class="active" onclick="showPage('home')">
     <span class="nav-icon">⌂</span>
     Home
   </button>
 
-  <button
-    class="nav-btn"
-    onclick="showPage('money',this)"
-  >
+  <button id="nav-money" onclick="showPage('money')">
     <span class="nav-icon">$</span>
     Money
   </button>
 
-  <button
-    class="nav-btn"
-    onclick="showPage('todo',this)"
-  >
+  <button id="nav-todo" onclick="showPage('todo')">
     <span class="nav-icon">✓</span>
     To-Do
   </button>
 
-  <button
-    class="nav-btn"
-    onclick="showPage('homework',this)"
-  >
+  <button id="nav-homework" onclick="showPage('homework')">
     <span class="nav-icon">📚</span>
     Homework
   </button>
 
-  <button
-    class="nav-btn"
-    onclick="showPage('work',this)"
-  >
+  <button id="nav-work" onclick="showPage('work')">
     <span class="nav-icon">💼</span>
     Work
   </button>
@@ -628,832 +387,696 @@ label {
 </nav>
 
 
-<!-- ================= FIREBASE ================= -->
-
-<script type="module">
-
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-
-const firebaseConfig = {
-
-  apiKey: "PASTE_API_KEY_HERE",
-
-  authDomain: "PASTE_AUTH_DOMAIN_HERE",
-
-  projectId: "PASTE_PROJECT_ID_HERE",
-
-  storageBucket: "PASTE_STORAGE_BUCKET_HERE",
-
-  messagingSenderId: "PASTE_MESSAGING_SENDER_ID_HERE",
-
-  appId: "PASTE_APP_ID_HERE"
-
-};
-
-
-const app =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(app);
-
-const provider =
-  new GoogleAuthProvider();
-
-
-window.googleLogin = async function() {
-
-  try {
-
-    await signInWithPopup(
-      auth,
-      provider
-    );
-
-  } catch(error) {
-
-    console.error(error);
-
-    alert(
-      "Google sign-in failed. Check your Firebase setup."
-    );
-
-  }
-
-};
-
-
-window.googleLogout = async function() {
-
-  try {
-
-    await signOut(auth);
-
-    alert("You have been signed out.");
-
-  } catch(error) {
-
-    console.error(error);
-
-  }
-
-};
-
-
-onAuthStateChanged(auth,(user)=>{
-
-  if(user) {
-
-    document
-      .getElementById("loggedOutArea")
-      .classList.add("hidden");
-
-    document
-      .getElementById("loggedInArea")
-      .classList.remove("hidden");
-
-    document
-      .getElementById("userName")
-      .textContent =
-        user.displayName || "User";
-
-    document
-      .getElementById("userEmail")
-      .textContent =
-        user.email || "";
-
-    document
-      .getElementById("userPhoto")
-      .src =
-        user.photoURL || "";
-
-  } else {
-
-    document
-      .getElementById("loggedOutArea")
-      .classList.remove("hidden");
-
-    document
-      .getElementById("loggedInArea")
-      .classList.add("hidden");
-
-  }
-
-});
-
-</script>
-
-
 <script>
 
-/* ================= DATA ================= */
+/* =========================
+   DATA
+========================= */
 
-let balance =
-  Number(localStorage.getItem("balance")) || 0;
+let balance = Number(localStorage.getItem("balance")) || 0;
 
 let transactions =
-  JSON.parse(
-    localStorage.getItem("transactions")
-  ) || [];
+  JSON.parse(localStorage.getItem("transactions")) || [];
 
 let tasks =
-  JSON.parse(
-    localStorage.getItem("tasks")
-  ) || [];
+  JSON.parse(localStorage.getItem("tasks")) || [];
 
 let homework =
-  JSON.parse(
-    localStorage.getItem("homework")
-  ) || [];
+  JSON.parse(localStorage.getItem("homework")) || [];
 
 let work =
-  JSON.parse(
-    localStorage.getItem("work")
-  ) || [];
+  JSON.parse(localStorage.getItem("work")) || [];
 
 
-/* ================= HELPERS ================= */
+/* =========================
+   GENERAL
+========================= */
 
-function today() {
-
-  const d = new Date();
-
-  const year =
-    d.getFullYear();
-
-  const month =
-    String(d.getMonth()+1)
-      .padStart(2,"0");
-
-  const day =
-    String(d.getDate())
-      .padStart(2,"0");
-
-  return `${year}-${month}-${day}`;
+function saveData() {
+  localStorage.setItem("balance", balance);
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  localStorage.setItem("homework", JSON.stringify(homework));
+  localStorage.setItem("work", JSON.stringify(work));
 }
 
+function today() {
+  let d = new Date();
+  return d.toISOString().split("T")[0];
+}
 
 function formatTime(time) {
 
-  if(!time)
-    return "No time";
+  if (!time) return "";
 
-  const parts =
-    time.split(":");
+  let parts = time.split(":");
+  let hour = Number(parts[0]);
+  let minute = parts[1];
 
-  let hour =
-    Number(parts[0]);
+  let ampm = hour >= 12 ? "PM" : "AM";
 
-  const minute =
-    parts[1];
+  hour = hour % 12;
+  if (hour === 0) hour = 12;
 
-  const suffix =
-    hour >= 12 ? "PM" : "AM";
-
-  hour =
-    hour % 12;
-
-  if(hour === 0)
-    hour = 12;
-
-  return `${hour}:${minute} ${suffix}`;
+  return hour + ":" + minute + " " + ampm;
 }
-
 
 function formatDate(date) {
 
-  if(!date)
-    return "No date";
+  if (!date) return "";
 
-  return new Date(
-    `${date}T00:00:00`
-  ).toLocaleDateString([],{
-    month:"short",
-    day:"numeric",
-    year:"numeric"
+  let d = new Date(date + "T00:00:00");
+
+  return d.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showPage(pageName) {
+
+  document.querySelectorAll(".page").forEach(function(page) {
+    page.classList.remove("active");
   });
 
+  document.getElementById(pageName).classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(function(button) {
+    button.classList.remove("active");
+  });
+
+  document.getElementById("nav-" + pageName).classList.add("active");
+
+  window.scrollTo(0, 0);
 }
 
 
-function formatDateTime(date,time) {
+/* =========================
+   MONEY
+========================= */
 
-  if(!date)
-    return "No date";
+function addMoney() {
 
-  return `${formatDate(date)}${
-    time ? " at "+formatTime(time) : ""
-  }`;
+  let amount = Number(document.getElementById("moneyAmount").value);
+  let reason = document.getElementById("moneyReason").value.trim();
 
-}
-
-
-function escapeHTML(text) {
-
-  return String(text)
-
-    .replaceAll("&","&amp;")
-
-    .replaceAll("<","&lt;")
-
-    .replaceAll(">","&gt;")
-
-    .replaceAll('"',"&quot;")
-
-    .replaceAll("'","&#039;");
-
-}
-
-
-/* ================= NAVIGATION ================= */
-
-window.showPage =
-function(page,button) {
-
-  document
-    .querySelectorAll("section")
-    .forEach(section =>
-      section.classList.add("hidden")
-    );
-
-  document
-    .getElementById(page+"Page")
-    .classList.remove("hidden");
-
-  document
-    .querySelectorAll(".nav-btn")
-    .forEach(btn =>
-      btn.classList.remove("active")
-    );
-
-  button.classList.add("active");
-
-
-  const titles = {
-
-    home:[
-      "Home",
-      "Your day at a glance"
-    ],
-
-    money:[
-      "Money",
-      "Track your balance"
-    ],
-
-    todo:[
-      "To-Do",
-      "Stay on top of your tasks"
-    ],
-
-    homework:[
-      "Homework",
-      "Keep your assignments organized"
-    ],
-
-    work:[
-      "Work",
-      "Keep track of your shifts"
-    ]
-
-  };
-
-
-  document
-    .getElementById("pageTitle")
-    .textContent =
-      titles[page][0];
-
-  document
-    .getElementById("pageSubtitle")
-    .textContent =
-      titles[page][1];
-
-};
-
-
-/* ================= MONEY ================= */
-
-function saveMoney() {
-
-  localStorage.setItem(
-    "balance",
-    balance
-  );
-
-  localStorage.setItem(
-    "transactions",
-    JSON.stringify(transactions)
-  );
-
-}
-
-
-window.addMoney =
-function() {
-
-  const amount =
-    Number(
-      document
-        .getElementById("moneyAmount")
-        .value
-    );
-
-  const reason =
-    document
-      .getElementById("moneyReason")
-      .value.trim();
-
-
-  if(!amount || amount <= 0) {
-
+  if (!amount || amount <= 0) {
     alert("Enter an amount.");
-
     return;
-
   }
 
-
-  if(!reason) {
-
-    alert("Enter a reason for the money.");
-
+  if (!reason) {
+    alert("Enter a reason.");
     return;
-
   }
-
 
   balance += amount;
 
-
   transactions.unshift({
-
-    amount:amount,
-
-    reason:reason,
-
-    date:
-      new Date().toLocaleString()
-
+    amount: amount,
+    reason: reason,
+    type: "add",
+    date: new Date().toLocaleString()
   });
 
+  saveData();
 
-  document
-    .getElementById("moneyAmount")
-    .value="";
+  document.getElementById("moneyAmount").value = "";
+  document.getElementById("moneyReason").value = "";
 
-  document
-    .getElementById("moneyReason")
-    .value="";
+  renderAll();
+}
 
+function removeMoney() {
 
-  saveMoney();
+  let amount = Number(document.getElementById("moneyAmount").value);
+  let reason = document.getElementById("moneyReason").value.trim();
 
-  renderMoney();
-
-  renderHome();
-
-};
-
-
-window.removeMoney =
-function() {
-
-  const amount =
-    Number(
-      document
-        .getElementById("moneyAmount")
-        .value
-    );
-
-  const reason =
-    document
-      .getElementById("moneyReason")
-      .value.trim();
-
-
-  if(!amount || amount <= 0) {
-
+  if (!amount || amount <= 0) {
     alert("Enter an amount.");
-
     return;
-
   }
 
-
-  if(!reason) {
-
-    alert("Enter a reason for the money.");
-
+  if (!reason) {
+    alert("Enter a reason.");
     return;
-
   }
-
 
   balance -= amount;
 
-
   transactions.unshift({
-
-    amount:-amount,
-
-    reason:reason,
-
-    date:
-      new Date().toLocaleString()
-
+    amount: amount,
+    reason: reason,
+    type: "remove",
+    date: new Date().toLocaleString()
   });
 
+  saveData();
 
-  document
-    .getElementById("moneyAmount")
-    .value="";
+  document.getElementById("moneyAmount").value = "";
+  document.getElementById("moneyReason").value = "";
 
-  document
-    .getElementById("moneyReason")
-    .value="";
-
-
-  saveMoney();
-
-  renderMoney();
-
-  renderHome();
-
-};
-
+  renderAll();
+}
 
 function renderMoney() {
 
-  document
-    .getElementById("balance")
-    .textContent =
-      "$"+balance.toFixed(2);
+  document.getElementById("moneyBalance").textContent =
+    "$" + balance.toFixed(2);
 
+  document.getElementById("homeBalance").textContent =
+    "$" + balance.toFixed(2);
 
-  const box =
-    document
-      .getElementById("transactions");
+  let container = document.getElementById("transactions");
 
-
-  if(!transactions.length) {
-
-    box.innerHTML =
+  if (transactions.length === 0) {
+    container.innerHTML =
       '<div class="empty">No transactions yet.</div>';
-
     return;
-
   }
 
+  container.innerHTML = transactions.map(function(t) {
 
-  box.innerHTML =
-    transactions.map(t=>{
+    let sign = t.type === "add" ? "+" : "-";
 
-      const positive =
-        t.amount >= 0;
-
-      return `
-
-        <div class="item">
-
-          <div class="item-title ${
-            positive
-              ? "money-positive"
-              : "money-negative"
-          }">
-
-            ${positive ? "+" : "-"}
-            $${Math.abs(t.amount).toFixed(2)}
-
-          </div>
-
-          <div class="small">
-
-            Reason:
-            ${escapeHTML(
-              t.reason || "No reason recorded"
-            )}
-
-          </div>
-
-          <div class="small">
-
-            ${escapeHTML(
-              t.date || ""
-            )}
-
-          </div>
-
+    return `
+      <div class="item">
+        <div class="item-title">
+          ${sign}$${Number(t.amount).toFixed(2)}
         </div>
+        <div class="small">${escapeHTML(t.reason || "No reason")}</div>
+        <div class="small">${t.date || ""}</div>
+      </div>
+    `;
 
-      `;
-
-    }).join("");
-
+  }).join("");
 }
 
 
-/* ================= TASKS ================= */
+/* =========================
+   TASKS
+========================= */
 
-function saveTasks() {
+function addTask() {
 
-  localStorage.setItem(
-    "tasks",
-    JSON.stringify(tasks)
-  );
+  let name = document.getElementById("taskName").value.trim();
+  let date = document.getElementById("taskDate").value;
+  let deadline = document.getElementById("taskDeadline").value;
+  let place = document.getElementById("taskPlace").value.trim();
 
-}
-
-
-window.addTask =
-function() {
-
-  const name =
-    document
-      .getElementById("taskName")
-      .value.trim();
-
-  const deadline =
-    document
-      .getElementById("taskDeadline")
-      .value;
-
-  const location =
-    document
-      .getElementById("taskLocation")
-      .value.trim();
-
-
-  if(!name) {
-
+  if (!name) {
     alert("Enter a task.");
-
     return;
-
   }
-
 
   tasks.push({
-
-    id:Date.now(),
-
-    name:name,
-
-    date:
-      document
-        .getElementById("taskDate")
-        .value || today(),
-
-    deadline:deadline,
-
-    location:location,
-
-    done:false
-
+    name: name,
+    date: date,
+    deadline: deadline,
+    place: place,
+    done: false
   });
 
+  saveData();
 
-  document
-    .getElementById("taskName")
-    .value="";
+  document.getElementById("taskName").value = "";
+  document.getElementById("taskDate").value = "";
+  document.getElementById("taskDeadline").value = "";
+  document.getElementById("taskPlace").value = "";
 
-  document
-    .getElementById("taskDeadline")
-    .value="";
+  renderAll();
+}
 
-  document
-    .getElementById("taskLocation")
-    .value="";
+function toggleTask(index) {
 
+  tasks[index].done = !tasks[index].done;
 
-  saveTasks();
+  saveData();
+  renderAll();
+}
 
-  renderTasks();
+function deleteTask(index) {
 
-  renderHome();
+  tasks.splice(index, 1);
 
-};
-
-
-window.toggleTask =
-function(id) {
-
-  const task =
-    tasks.find(t=>t.id===id);
-
-  if(task)
-    task.done=!task.done;
-
-  saveTasks();
-
-  renderTasks();
-
-  renderHome();
-
-};
-
-
-window.deleteTask =
-function(id) {
-
-  tasks =
-    tasks.filter(
-      t=>t.id!==id
-    );
-
-  saveTasks();
-
-  renderTasks();
-
-  renderHome();
-
-};
-
+  saveData();
+  renderAll();
+}
 
 function renderTasks() {
 
-  const selectedDate =
-    document
-      .getElementById("taskDate")
-      .value || today();
+  tasks.sort(function(a, b) {
 
+    let aDate = (a.date || "9999-12-31") + (a.deadline || "99:99");
+    let bDate = (b.date || "9999-12-31") + (b.deadline || "99:99");
 
-  const list =
-    tasks
+    return aDate.localeCompare(bDate);
+  });
 
-      .filter(
-        t=>t.date===selectedDate
-      )
+  let container = document.getElementById("tasks");
 
-      .sort((a,b)=>{
-
-        if(!a.deadline)
-          return 1;
-
-        if(!b.deadline)
-          return -1;
-
-        return a.deadline
-          .localeCompare(
-            b.deadline
-          );
-
-      });
-
-
-  document
-    .getElementById("taskCount")
-    .textContent =
-      list.filter(
-        t=>!t.done
-      ).length;
-
-
-  const box =
-    document
-      .getElementById("taskList");
-
-
-  if(!list.length) {
-
-    box.innerHTML =
-      '<div class="empty">No tasks for this date.</div>';
-
+  if (tasks.length === 0) {
+    container.innerHTML =
+      '<div class="empty">No tasks yet.</div>';
     return;
-
   }
 
+  container.innerHTML = tasks.map(function(task, index) {
 
-  box.innerHTML =
-    list.map(task=>`
-
-      <div class="item ${
-        task.done ? "done" : ""
-      }">
+    return `
+      <div class="item ${task.done ? "done" : ""}">
 
         <div class="item-title">
           ${escapeHTML(task.name)}
         </div>
 
         <div class="small">
-          Deadline:
-          ${formatTime(task.deadline)}
+          ${task.date ? formatDate(task.date) : "No date"}
         </div>
 
-        ${
-          task.location
-          ? `
-            <div class="small">
-              Location:
-              ${escapeHTML(task.location)}
-            </div>
-          `
-          : ""
-        }
+        ${task.deadline ?
+          `<div class="time">${formatTime(task.deadline)}</div>`
+          : ""}
 
-        <div class="row">
+        ${task.place ?
+          `<div class="small">${escapeHTML(task.place)}</div>`
+          : ""}
+
+        <div class="item-buttons">
 
           <button
-            class="success"
-            onclick="toggleTask(${task.id})"
-          >
+            class="complete"
+            onclick="toggleTask(${index})">
             ${task.done ? "Undo" : "Complete"}
           </button>
 
           <button
-            class="danger"
-            onclick="deleteTask(${task.id})"
-          >
+            class="delete"
+            onclick="deleteTask(${index})">
             Delete
           </button>
 
         </div>
 
       </div>
+    `;
 
-    `).join("");
-
+  }).join("");
 }
 
 
-/* ================= HOMEWORK ================= */
+/* =========================
+   HOMEWORK
+========================= */
 
-function saveHomework() {
+function addHomework() {
 
-  localStorage.setItem(
-    "homework",
-    JSON.stringify(homework)
-  );
+  let name =
+    document.getElementById("homeworkName").value.trim();
 
-}
+  let className =
+    document.getElementById("homeworkClass").value.trim();
 
+  let dueDate =
+    document.getElementById("homeworkDate").value;
 
-window.addHomework =
-function() {
+  let dueTime =
+    document.getElementById("homeworkDueTime").value;
 
-  const name =
-    document
-      .getElementById("homeworkName")
-      .value.trim();
+  let doTime =
+    document.getElementById("homeworkDoTime").value;
 
-  const className =
-    document
-      .getElementById("homeworkClass")
-      .value.trim();
+  let priority =
+    document.getElementById("homeworkPriority").value;
 
-  const dueDate =
-    document
-      .getElementById("homeworkDueDate")
-      .value;
-
-  const dueTime =
-    document
-      .getElementById("homeworkDueTime")
-      .value;
-
-  const doTime =
-    document
-      .getElementById("homeworkDoTime")
-      .value;
-
-  const priority =
-    document
-      .getElementById("homeworkPriority")
-      .value;
-
-
-  if(!name || !dueDate) {
-
-    alert(
-      "Please enter the assignment and due date."
-    );
-
+  if (!name) {
+    alert("Enter an assignment.");
     return;
+  }
 
+  homework.push({
+    name: name,
+    className: className,
+    dueDate: dueDate,
+    dueTime: dueTime,
+    doTime: doTime,
+    priority: priority,
+    done: false
+  });
+
+  saveData();
+
+  document.getElementById("homeworkName").value = "";
+  document.getElementById("homeworkClass").value = "";
+  document.getElementById("homeworkDate").value = "";
+  document.getElementById("homeworkDueTime").value = "";
+  document.getElementById("homeworkDoTime").value = "";
+
+  renderAll();
+}
+
+function toggleHomework(index) {
+
+  homework[index].done = !homework[index].done;
+
+  saveData();
+  renderAll();
+}
+
+function deleteHomework(index) {
+
+  homework.splice(index, 1);
+
+  saveData();
+  renderAll();
+}
+
+function renderHomework() {
+
+  homework.sort(function(a, b) {
+
+    let aDate =
+      (a.dueDate || "9999-12-31") +
+      (a.dueTime || "99:99");
+
+    let bDate =
+      (b.dueDate || "9999-12-31") +
+      (b.dueTime || "99:99");
+
+    return aDate.localeCompare(bDate);
+  });
+
+  let container =
+    document.getElementById("homeworkList");
+
+  if (homework.length === 0) {
+    container.innerHTML =
+      '<div class="empty">No homework yet.</div>';
+    return;
+  }
+
+  container.innerHTML = homework.map(function(hw, index) {
+
+    return `
+      <div class="item ${hw.done ? "done" : ""}">
+
+        <div class="item-title">
+          ${escapeHTML(hw.name)}
+        </div>
+
+        ${hw.className ?
+          `<div class="small">${escapeHTML(hw.className)}</div>`
+          : ""}
+
+        ${hw.dueDate ?
+          `<div class="small">Due: ${formatDate(hw.dueDate)}</div>`
+          : ""}
+
+        ${hw.dueTime ?
+          `<div class="time">Due: ${formatTime(hw.dueTime)}</div>`
+          : ""}
+
+        ${hw.doTime ?
+          `<div class="small">Do it: ${formatTime(hw.doTime)}</div>`
+          : ""}
+
+        <div class="small">
+          Priority: ${escapeHTML(hw.priority || "Normal")}
+        </div>
+
+        <div class="item-buttons">
+
+          <button
+            class="complete"
+            onclick="toggleHomework(${index})">
+            ${hw.done ? "Undo" : "Complete"}
+          </button>
+
+          <button
+            class="delete"
+            onclick="deleteHomework(${index})">
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+}
+
+
+/* =========================
+   WORK
+========================= */
+
+function addWork() {
+
+  let name =
+    document.getElementById("workName").value.trim();
+
+  let location =
+    document.getElementById("workLocation").value.trim();
+
+  let date =
+    document.getElementById("workDate").value;
+
+  let start =
+    document.getElementById("workStart").value;
+
+  let end =
+    document.getElementById("workEnd").value;
+
+  if (!name) {
+    alert("Enter the work name.");
+    return;
+  }
+
+  work.push({
+    name: name,
+    location: location,
+    date: date,
+    start: start,
+    end: end,
+    done: false
+  });
+
+  saveData();
+
+  document.getElementById("workName").value = "";
+  document.getElementById("workLocation").value = "";
+  document.getElementById("workDate").value = "";
+  document.getElementById("workStart").value = "";
+  document.getElementById("workEnd").value = "";
+
+  renderAll();
+}
+
+function toggleWork(index) {
+
+  work[index].done = !work[index].done;
+
+  saveData();
+  renderAll();
+}
+
+function deleteWork(index) {
+
+  work.splice(index, 1);
+
+  saveData();
+  renderAll();
+}
+
+function renderWork() {
+
+  work.sort(function(a, b) {
+
+    let aValue =
+      (a.date || "9999-12-31") +
+      (a.start || "99:99");
+
+    let bValue =
+      (b.date || "9999-12-31") +
+      (b.start || "99:99");
+
+    return aValue.localeCompare(bValue);
+  });
+
+  let container =
+    document.getElementById("workList");
+
+  if (work.length === 0) {
+    container.innerHTML =
+      '<div class="empty">No work added yet.</div>';
+    return;
+  }
+
+  container.innerHTML = work.map(function(job, index) {
+
+    return `
+      <div class="item ${job.done ? "done" : ""}">
+
+        <div class="item-title">
+          ${escapeHTML(job.name)}
+        </div>
+
+        ${job.location ?
+          `<div class="small">${escapeHTML(job.location)}</div>`
+          : ""}
+
+        ${job.date ?
+          `<div class="small">${formatDate(job.date)}</div>`
+          : ""}
+
+        ${job.start ?
+          `<div class="time">
+            ${formatTime(job.start)}
+            ${job.end ? " - " + formatTime(job.end) : ""}
+          </div>`
+          : ""}
+
+        <div class="item-buttons">
+
+          <button
+            class="complete"
+            onclick="toggleWork(${index})">
+            ${job.done ? "Undo" : "Complete"}
+          </button>
+
+          <button
+            class="delete"
+            onclick="deleteWork(${index})">
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function renderHome() {
+
+  let todayDate = today();
+
+  let todayTasks =
+    tasks.filter(function(task) {
+      return task.date === todayDate && !task.done;
+    });
+
+  let todayHomework =
+    homework.filter(function(hw) {
+      return hw.dueDate === todayDate && !hw.done;
+    });
+
+  let todayWork =
+    work.filter(function(job) {
+      return job.date === todayDate && !job.done;
+    });
+
+
+  let taskContainer =
+    document.getElementById("homeTasks");
+
+  if (todayTasks.length === 0) {
+
+    taskContainer.innerHTML =
+      '<div class="empty">No tasks today.</div>';
+
+  } else {
+
+    taskContainer.innerHTML =
+      todayTasks.map(function(task) {
+
+        return `
+          <div class="item">
+            <div class="item-title">
+              ${escapeHTML(task.name)}
+            </div>
+
+            ${task.deadline ?
+              `<div class="time">${formatTime(task.deadline)}</div>`
+              : ""}
+
+            ${task.place ?
+              `<div class="small">${escapeHTML(task.place)}</div>`
+              : ""}
+          </div>
+        `;
+
+      }).join("");
   }
 
 
-  homework.push({
+  let homeworkContainer =
+    document.getElementById("homeHomework");
 
-    id:Date.now(),
+  if (todayHomework.length === 0) {
 
-    name:name,
+    homeworkContainer.innerHTML =
+      '<div class="empty">No homework due today.</div>';
 
-    className:className,
+  } else {
 
-    dueDate:dueDate,
+    homeworkContainer.innerHTML =
+      todayHomework.map(function(hw) {
 
-    dueTime:dueTime,
+        return `
+          <div class="item">
 
-    doTime:doTime
+            <div class="item-title">
+              ${escapeHTML(hw.name)}
+            </div>
+
+            ${hw.className ?
+              `<div class="small">${escapeHTML(hw.className)}</div>`
+              : ""}
+
+            ${hw.dueTime ?
+              `<div class="time">${formatTime(hw.dueTime)}</div>`
+              : ""}
+
+          </div>
+        `;
+
+      }).join("");
+  }
+
+
+  let workContainer =
+    document.getElementById("homeWork");
+
+  if (todayWork.length === 0) {
+
+    workContainer.innerHTML =
+      '<div class="empty">No work today.</div>';
+
+  } else {
+
+    workContainer.innerHTML =
+      todayWork.map(function(job) {
+
+        return `
+          <div class="item">
+
+            <div class="item-title">
+              ${escapeHTML(job.name)}
+            </div>
+
+            ${job.location ?
+              `<div class
