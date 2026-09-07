@@ -28,12 +28,25 @@ header {
 
 header h1 {
   margin: 0;
+  color: #3f5fe8;
+}
+
+header p {
+  margin: 7px 0 0;
+  color: #777;
+}
+
+.sun {
+  font-size: 25px;
+  margin-right: 5px;
 }
 
 .page {
   display: none;
   padding: 20px;
   padding-bottom: 100px;
+  max-width: 700px;
+  margin: auto;
 }
 
 .page.show {
@@ -48,9 +61,15 @@ header h1 {
   box-shadow: 0 3px 12px rgba(0,0,0,.08);
 }
 
+.card h2 {
+  margin-top: 0;
+}
+
 .balance {
   font-size: 36px;
   font-weight: bold;
+  color: #222;
+  margin: 10px 0;
 }
 
 input,
@@ -71,6 +90,77 @@ button {
   font-weight: bold;
 }
 
+button:active {
+  transform: scale(.98);
+}
+
+.money-button {
+  margin-top: 5px;
+}
+
+.dropdown-button {
+  background: #eef1ff;
+  color: #3f5fe8;
+  text-align: left;
+  margin-top: 0;
+}
+
+.dropdown-content {
+  display: none;
+  margin-top: 10px;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.item {
+  padding: 14px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.item-title {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.item-info {
+  color: #666;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.item-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.item-buttons button {
+  margin: 0;
+  flex: 1;
+}
+
+.done-button {
+  background: #6375ff;
+}
+
+.delete-button {
+  background: #e45d5d;
+}
+
+.empty {
+  color: #777;
+  padding: 8px 0;
+}
+
+.icon {
+  margin-right: 7px;
+}
+
 .nav {
   position: fixed;
   bottom: 0;
@@ -88,19 +178,24 @@ button {
   color: #555;
   border-radius: 0;
   margin: 0;
-  padding: 12px 4px;
+  padding: 10px 3px;
+  font-size: 12px;
 }
 
 .nav button.active {
-  color: #6375ff;
+  color: #3f5fe8;
   font-weight: bold;
 }
 
-.item {
-  padding: 14px;
-  margin-top: 10px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+.nav-icon {
+  display: block;
+  font-size: 21px;
+  margin-bottom: 3px;
+}
+
+.section-title {
+  font-size: 19px;
+  margin-bottom: 10px;
 }
 
 </style>
@@ -108,56 +203,106 @@ button {
 
 <body>
 
+
+<!-- HEADER -->
+
 <header>
-  <h1>My Day</h1>
+
+  <h1>
+    <span class="sun">☀️</span>
+    My Day
+  </h1>
+
   <p id="date"></p>
+
 </header>
 
 
-<!-- HOME -->
+<!-- =========================
+     HOME
+========================= -->
 
 <div id="home" class="page show">
 
   <div class="card">
-    <h2>Balance</h2>
-    <div class="balance" id="homeBalance">$0.00</div>
+
+    <h2>
+      <span class="icon">💵</span>
+      Balance
+    </h2>
+
+    <div
+      class="balance"
+      id="homeBalance">
+      $0.00
+    </div>
+
   </div>
 
+
   <div class="card">
-    <h2>Today's Tasks</h2>
+
+    <h2>
+      <span class="icon">✓</span>
+      Today's Tasks
+    </h2>
+
     <div id="homeTasks">
       No tasks today.
     </div>
+
   </div>
 
+
   <div class="card">
-    <h2>Today's Homework</h2>
+
+    <h2>
+      <span class="icon">📚</span>
+      Today's Homework
+    </h2>
+
     <div id="homeHomework">
       No homework today.
     </div>
+
   </div>
 
+
   <div class="card">
-    <h2>Today's Work</h2>
+
+    <h2>
+      <span class="icon">💼</span>
+      Today's Work
+    </h2>
+
     <div id="homeWork">
       No work today.
     </div>
+
   </div>
 
 </div>
 
 
-<!-- MONEY -->
+<!-- =========================
+     MONEY
+========================= -->
 
 <div id="money" class="page">
 
   <div class="card">
 
-    <h2>Money</h2>
+    <h2>
+      <span class="icon">💵</span>
+      Money
+    </h2>
 
-    <div class="balance" id="moneyBalance">
+    <div
+      class="balance"
+      id="moneyBalance">
       $0.00
     </div>
+
 
     <input
       id="amount"
@@ -166,28 +311,51 @@ button {
       placeholder="Amount"
     >
 
+
     <input
       id="reason"
       type="text"
       placeholder="Reason"
     >
 
-    <button onclick="addMoney()">
+
+    <button
+      class="money-button"
+      onclick="addMoney()">
       + Add Money
     </button>
 
-    <button onclick="removeMoney()">
+
+    <button
+      class="money-button"
+      onclick="removeMoney()">
       − Remove Money
     </button>
 
   </div>
 
+
   <div class="card">
 
-    <h2>Transactions</h2>
+    <button
+      class="dropdown-button"
+      onclick="toggleTransactions()">
 
-    <div id="transactions">
-      No transactions yet.
+      <span class="icon">🧾</span>
+      Transactions
+      <span id="transactionArrow">▼</span>
+
+    </button>
+
+
+    <div
+      id="transactionDropdown"
+      class="dropdown-content">
+
+      <div id="transactions">
+        No transactions yet.
+      </div>
+
     </div>
 
   </div>
@@ -195,19 +363,26 @@ button {
 </div>
 
 
-<!-- TO DO -->
+<!-- =========================
+     TO DO
+========================= -->
 
 <div id="todo" class="page">
 
   <div class="card">
 
-    <h2>Add Task</h2>
+    <h2>
+      <span class="icon">✓</span>
+      Add Task
+    </h2>
+
 
     <input
       id="task"
       type="text"
       placeholder="Task"
     >
+
 
     <label>Date</label>
 
@@ -216,6 +391,7 @@ button {
       type="date"
     >
 
+
     <label>Deadline</label>
 
     <input
@@ -223,11 +399,13 @@ button {
       type="time"
     >
 
+
     <input
       id="taskLocation"
       type="text"
       placeholder="Location"
     >
+
 
     <button onclick="addTask()">
       Add Task
@@ -235,9 +413,13 @@ button {
 
   </div>
 
+
   <div class="card">
 
-    <h2>To-Do List</h2>
+    <h2>
+      <span class="icon">✓</span>
+      To-Do List
+    </h2>
 
     <div id="taskList">
       No tasks yet.
@@ -248,13 +430,19 @@ button {
 </div>
 
 
-<!-- HOMEWORK -->
+<!-- =========================
+     HOMEWORK
+========================= -->
 
 <div id="homework" class="page">
 
   <div class="card">
 
-    <h2>Add Homework</h2>
+    <h2>
+      <span class="icon">📚</span>
+      Add Homework
+    </h2>
+
 
     <input
       id="assignment"
@@ -262,11 +450,13 @@ button {
       placeholder="Assignment"
     >
 
+
     <input
       id="className"
       type="text"
       placeholder="Class"
     >
+
 
     <label>Due date</label>
 
@@ -275,6 +465,7 @@ button {
       type="date"
     >
 
+
     <label>Due time</label>
 
     <input
@@ -282,12 +473,14 @@ button {
       type="time"
     >
 
+
     <label>Time to do it</label>
 
     <input
       id="doTime"
       type="time"
     >
+
 
     <select id="priority">
 
@@ -297,15 +490,20 @@ button {
 
     </select>
 
+
     <button onclick="addHomework()">
       Add Homework
     </button>
 
   </div>
 
+
   <div class="card">
 
-    <h2>Homework</h2>
+    <h2>
+      <span class="icon">📚</span>
+      Homework
+    </h2>
 
     <div id="homeworkList">
       No homework yet.
@@ -316,13 +514,19 @@ button {
 </div>
 
 
-<!-- WORK -->
+<!-- =========================
+     WORK
+========================= -->
 
 <div id="work" class="page">
 
   <div class="card">
 
-    <h2>Add Work</h2>
+    <h2>
+      <span class="icon">💼</span>
+      Add Work
+    </h2>
+
 
     <input
       id="workName"
@@ -330,11 +534,13 @@ button {
       placeholder="Job / Shift"
     >
 
+
     <input
       id="workLocation"
       type="text"
       placeholder="Location"
     >
+
 
     <label>Date</label>
 
@@ -343,12 +549,14 @@ button {
       type="date"
     >
 
+
     <label>Start time</label>
 
     <input
       id="workStart"
       type="time"
     >
+
 
     <label>End time</label>
 
@@ -357,15 +565,20 @@ button {
       type="time"
     >
 
+
     <button onclick="addWork()">
       Add Work
     </button>
 
   </div>
 
+
   <div class="card">
 
-    <h2>Work</h2>
+    <h2>
+      <span class="icon">💼</span>
+      Work
+    </h2>
 
     <div id="workList">
       No work yet.
@@ -376,7 +589,9 @@ button {
 </div>
 
 
-<!-- NAVIGATION -->
+<!-- =========================
+     BOTTOM NAV
+========================= -->
 
 <div class="nav">
 
@@ -384,31 +599,50 @@ button {
     id="button-home"
     class="active"
     onclick="showPage('home')">
+
+    <span class="nav-icon">🏠</span>
     Home
+
   </button>
+
 
   <button
     id="button-money"
     onclick="showPage('money')">
+
+    <span class="nav-icon">💵</span>
     Money
+
   </button>
+
 
   <button
     id="button-todo"
     onclick="showPage('todo')">
+
+    <span class="nav-icon">✓</span>
     To-Do
+
   </button>
+
 
   <button
     id="button-homework"
     onclick="showPage('homework')">
+
+    <span class="nav-icon">📚</span>
     Homework
+
   </button>
+
 
   <button
     id="button-work"
     onclick="showPage('work')">
+
+    <span class="nav-icon">💼</span>
     Work
+
   </button>
 
 </div>
@@ -416,17 +650,22 @@ button {
 
 <script>
 
-/* -------------------------
+
+/* =========================
    TAB SWITCHING
-------------------------- */
+========================= */
 
 function showPage(pageName) {
 
-  var pages = document.getElementsByClassName("page");
+  var pages =
+    document.getElementsByClassName("page");
 
   for (var i = 0; i < pages.length; i++) {
+
     pages[i].classList.remove("show");
+
   }
+
 
   document
     .getElementById(pageName)
@@ -437,18 +676,22 @@ function showPage(pageName) {
     document.querySelectorAll(".nav button");
 
   for (var j = 0; j < buttons.length; j++) {
+
     buttons[j].classList.remove("active");
+
   }
+
 
   document
     .getElementById("button-" + pageName)
     .classList.add("active");
+
 }
 
 
-/* -------------------------
+/* =========================
    DATE
-------------------------- */
+========================= */
 
 document.getElementById("date").innerHTML =
   new Date().toLocaleDateString(
@@ -462,12 +705,13 @@ document.getElementById("date").innerHTML =
   );
 
 
-/* -------------------------
+/* =========================
    MONEY
-------------------------- */
+========================= */
 
 var balance =
   Number(localStorage.getItem("balance")) || 0;
+
 
 var transactions =
   JSON.parse(
@@ -486,66 +730,109 @@ function saveMoney() {
     "transactions",
     JSON.stringify(transactions)
   );
+
 }
 
 
 function addMoney() {
 
   var amount =
-    Number(document.getElementById("amount").value);
+    Number(
+      document.getElementById("amount").value
+    );
+
 
   var reason =
-    document.getElementById("reason").value;
+    document.getElementById("reason").value.trim();
+
 
   if (amount <= 0 || !reason) {
+
     alert("Enter an amount and a reason.");
+
     return;
+
   }
+
 
   balance += amount;
 
+
   transactions.push({
+
     amount: amount,
+
     reason: reason,
-    type: "+"
+
+    type: "+",
+
+    date:
+      new Date().toLocaleDateString()
+
   });
+
 
   saveMoney();
 
+
   document.getElementById("amount").value = "";
+
   document.getElementById("reason").value = "";
 
+
   updateMoney();
+
 }
 
 
 function removeMoney() {
 
   var amount =
-    Number(document.getElementById("amount").value);
+    Number(
+      document.getElementById("amount").value
+    );
+
 
   var reason =
-    document.getElementById("reason").value;
+    document.getElementById("reason").value.trim();
+
 
   if (amount <= 0 || !reason) {
+
     alert("Enter an amount and a reason.");
+
     return;
+
   }
+
 
   balance -= amount;
 
+
   transactions.push({
+
     amount: amount,
+
     reason: reason,
-    type: "-"
+
+    type: "-",
+
+    date:
+      new Date().toLocaleDateString()
+
   });
+
 
   saveMoney();
 
+
   document.getElementById("amount").value = "";
+
   document.getElementById("reason").value = "";
 
+
   updateMoney();
+
 }
 
 
@@ -554,6 +841,7 @@ function updateMoney() {
   document.getElementById("moneyBalance").innerHTML =
     "$" + balance.toFixed(2);
 
+
   document.getElementById("homeBalance").innerHTML =
     "$" + balance.toFixed(2);
 
@@ -561,15 +849,19 @@ function updateMoney() {
   var box =
     document.getElementById("transactions");
 
+
   if (transactions.length === 0) {
 
     box.innerHTML =
-      "No transactions yet.";
+      '<div class="empty">No transactions yet.</div>';
 
     return;
+
   }
 
+
   box.innerHTML = "";
+
 
   transactions
     .slice()
@@ -579,25 +871,75 @@ function updateMoney() {
       var item =
         document.createElement("div");
 
+
       item.className = "item";
 
+
       item.innerHTML =
-        "<strong>" +
+
+        "<div class='item-title'>" +
+
         t.type +
+
         "$" +
+
         Number(t.amount).toFixed(2) +
-        "</strong><br>" +
-        t.reason;
+
+        "</div>" +
+
+        "<div class='item-info'>" +
+
+        t.reason +
+
+        "</div>" +
+
+        "<div class='item-info'>" +
+
+        (t.date || "") +
+
+        "</div>";
+
 
       box.appendChild(item);
 
     });
+
 }
 
 
-/* -------------------------
+function toggleTransactions() {
+
+  var box =
+    document.getElementById(
+      "transactionDropdown"
+    );
+
+
+  var arrow =
+    document.getElementById(
+      "transactionArrow"
+    );
+
+
+  box.classList.toggle("show");
+
+
+  if (box.classList.contains("show")) {
+
+    arrow.innerHTML = "▲";
+
+  } else {
+
+    arrow.innerHTML = "▼";
+
+  }
+
+}
+
+
+/* =========================
    TASKS
-------------------------- */
+========================= */
 
 var tasks =
   JSON.parse(
@@ -608,12 +950,17 @@ var tasks =
 function addTask() {
 
   var name =
-    document.getElementById("task").value;
+    document.getElementById("task").value.trim();
+
 
   if (!name) {
+
     alert("Enter a task.");
+
     return;
+
   }
+
 
   tasks.push({
 
@@ -626,21 +973,69 @@ function addTask() {
       document.getElementById("taskTime").value,
 
     location:
-      document.getElementById("taskLocation").value
+      document.getElementById("taskLocation").value,
+
+    done: false
 
   });
+
 
   localStorage.setItem(
     "tasks",
     JSON.stringify(tasks)
   );
 
+
   document.getElementById("task").value = "";
+
   document.getElementById("taskDate").value = "";
+
   document.getElementById("taskTime").value = "";
+
   document.getElementById("taskLocation").value = "";
 
+
   updateTasks();
+
+  updateHome();
+
+}
+
+
+function completeTask(index) {
+
+  tasks[index].done =
+    !tasks[index].done;
+
+
+  localStorage.setItem(
+    "tasks",
+    JSON.stringify(tasks)
+  );
+
+
+  updateTasks();
+
+  updateHome();
+
+}
+
+
+function deleteTask(index) {
+
+  tasks.splice(index, 1);
+
+
+  localStorage.setItem(
+    "tasks",
+    JSON.stringify(tasks)
+  );
+
+
+  updateTasks();
+
+  updateHome();
+
 }
 
 
@@ -649,39 +1044,95 @@ function updateTasks() {
   var box =
     document.getElementById("taskList");
 
+
   if (tasks.length === 0) {
-    box.innerHTML = "No tasks yet.";
+
+    box.innerHTML =
+      '<div class="empty">No tasks yet.</div>';
+
     return;
+
   }
+
 
   box.innerHTML = "";
 
-  tasks.forEach(function(t) {
+
+  tasks.forEach(function(t, index) {
 
     var item =
       document.createElement("div");
 
-    item.className = "item";
+
+    item.className =
+      "item";
+
 
     item.innerHTML =
-      "<strong>" +
+
+      "<div class='item-title'>" +
+
+      "✓ " +
+
       t.name +
-      "</strong><br>" +
-      (t.date || "") +
-      "<br>" +
+
+      "</div>" +
+
+      "<div class='item-info'>" +
+
+      (t.date || "No date") +
+
+      "</div>" +
+
+      "<div class='item-info'>" +
+
       (t.time || "") +
-      "<br>" +
-      (t.location || "");
+
+      "</div>" +
+
+      "<div class='item-info'>" +
+
+      (t.location || "") +
+
+      "</div>" +
+
+
+      "<div class='item-buttons'>" +
+
+      "<button class='done-button' onclick='completeTask(" +
+
+      index +
+
+      ")'>" +
+
+      (t.done ? "Undo" : "Done") +
+
+      "</button>" +
+
+
+      "<button class='delete-button' onclick='deleteTask(" +
+
+      index +
+
+      ")'>" +
+
+      "Delete" +
+
+      "</button>" +
+
+      "</div>";
+
 
     box.appendChild(item);
 
   });
+
 }
 
 
-/* -------------------------
+/* =========================
    HOMEWORK
-------------------------- */
+========================= */
 
 var homework =
   JSON.parse(
@@ -692,12 +1143,19 @@ var homework =
 function addHomework() {
 
   var name =
-    document.getElementById("assignment").value;
+    document
+      .getElementById("assignment")
+      .value.trim();
+
 
   if (!name) {
+
     alert("Enter an assignment.");
+
     return;
+
   }
+
 
   homework.push({
 
@@ -716,22 +1174,71 @@ function addHomework() {
       document.getElementById("doTime").value,
 
     priority:
-      document.getElementById("priority").value
+      document.getElementById("priority").value,
+
+    done: false
 
   });
+
 
   localStorage.setItem(
     "homework",
     JSON.stringify(homework)
   );
 
+
   document.getElementById("assignment").value = "";
+
   document.getElementById("className").value = "";
+
   document.getElementById("dueDate").value = "";
+
   document.getElementById("dueTime").value = "";
+
   document.getElementById("doTime").value = "";
 
+
   updateHomework();
+
+  updateHome();
+
+}
+
+
+function completeHomework(index) {
+
+  homework[index].done =
+    !homework[index].done;
+
+
+  localStorage.setItem(
+    "homework",
+    JSON.stringify(homework)
+  );
+
+
+  updateHomework();
+
+  updateHome();
+
+}
+
+
+function deleteHomework(index) {
+
+  homework.splice(index, 1);
+
+
+  localStorage.setItem(
+    "homework",
+    JSON.stringify(homework)
+  );
+
+
+  updateHomework();
+
+  updateHome();
+
 }
 
 
@@ -740,43 +1247,111 @@ function updateHomework() {
   var box =
     document.getElementById("homeworkList");
 
+
   if (homework.length === 0) {
-    box.innerHTML = "No homework yet.";
+
+    box.innerHTML =
+      '<div class="empty">No homework yet.</div>';
+
     return;
+
   }
+
 
   box.innerHTML = "";
 
-  homework.forEach(function(h) {
+
+  homework.forEach(function(h, index) {
 
     var item =
       document.createElement("div");
 
-    item.className = "item";
+
+    item.className =
+      "item";
+
 
     item.innerHTML =
-      "<strong>" +
+
+      "<div class='item-title'>" +
+
+      "📚 " +
+
       h.name +
-      "</strong><br>" +
+
+      "</div>" +
+
+      "<div class='item-info'>" +
+
       (h.className || "") +
-      "<br>Due: " +
-      (h.dueDate || "") +
+
+      "</div>" +
+
+      "<div class='item-info'>" +
+
+      "Due: " +
+
+      (h.dueDate || "No date") +
+
       " " +
+
       (h.dueTime || "") +
-      "<br>Do it: " +
+
+      "</div>" +
+
+      "<div class='item-info'>" +
+
+      "Do it: " +
+
       (h.doTime || "") +
-      "<br>Priority: " +
-      h.priority;
+
+      "</div>" +
+
+      "<div class='item-info'>" +
+
+      "Priority: " +
+
+      h.priority +
+
+      "</div>" +
+
+
+      "<div class='item-buttons'>" +
+
+      "<button class='done-button' onclick='completeHomework(" +
+
+      index +
+
+      ")'>" +
+
+      (h.done ? "Undo" : "Done") +
+
+      "</button>" +
+
+
+      "<button class='delete-button' onclick='deleteHomework(" +
+
+      index +
+
+      ")'>" +
+
+      "Delete" +
+
+      "</button>" +
+
+      "</div>";
+
 
     box.appendChild(item);
 
   });
+
 }
 
 
-/* -------------------------
+/* =========================
    WORK
-------------------------- */
+========================= */
 
 var work =
   JSON.parse(
@@ -787,12 +1362,19 @@ var work =
 function addWork() {
 
   var name =
-    document.getElementById("workName").value;
+    document
+      .getElementById("workName")
+      .value.trim();
+
 
   if (!name) {
+
     alert("Enter the work name.");
+
     return;
+
   }
+
 
   work.push({
 
@@ -808,22 +1390,71 @@ function addWork() {
       document.getElementById("workStart").value,
 
     end:
-      document.getElementById("workEnd").value
+      document.getElementById("workEnd").value,
+
+    done: false
 
   });
+
 
   localStorage.setItem(
     "work",
     JSON.stringify(work)
   );
 
+
   document.getElementById("workName").value = "";
+
   document.getElementById("workLocation").value = "";
+
   document.getElementById("workDate").value = "";
+
   document.getElementById("workStart").value = "";
+
   document.getElementById("workEnd").value = "";
 
+
   updateWork();
+
+  updateHome();
+
+}
+
+
+function completeWork(index) {
+
+  work[index].done =
+    !work[index].done;
+
+
+  localStorage.setItem(
+    "work",
+    JSON.stringify(work)
+  );
+
+
+  updateWork();
+
+  updateHome();
+
+}
+
+
+function deleteWork(index) {
+
+  work.splice(index, 1);
+
+
+  localStorage.setItem(
+    "work",
+    JSON.stringify(work)
+  );
+
+
+  updateWork();
+
+  updateHome();
+
 }
 
 
@@ -832,48 +1463,166 @@ function updateWork() {
   var box =
     document.getElementById("workList");
 
+
   if (work.length === 0) {
-    box.innerHTML = "No work yet.";
+
+    box.innerHTML =
+      '<div class="empty">No work yet.</div>';
+
     return;
+
   }
+
 
   box.innerHTML = "";
 
-  work.forEach(function(w) {
+
+  work.forEach(function(w, index) {
 
     var item =
       document.createElement("div");
 
-    item.className = "item";
+
+    item.className =
+      "item";
+
 
     item.innerHTML =
-      "<strong>" +
+
+      "<div class='item-title'>" +
+
+      "💼 " +
+
       w.name +
-      "</strong><br>" +
+
+      "</div>" +
+
+      "<div class='item-info'>" +
+
       (w.location || "") +
-      "<br>" +
-      (w.date || "") +
-      "<br>" +
+
+      "</div>" +
+
+      "<div class='item-info'>" +
+
+      (w.date || "No date") +
+
+      "</div>" +
+
+      "<div class='item-info'>" +
+
       (w.start || "") +
+
       " - " +
-      (w.end || "");
+
+      (w.end || "") +
+
+      "</div>" +
+
+
+      "<div class='item-buttons'>" +
+
+      "<button class='done-button' onclick='completeWork(" +
+
+      index +
+
+      ")'>" +
+
+      (w.done ? "Undo" : "Done") +
+
+      "</button>" +
+
+
+      "<button class='delete-button' onclick='deleteWork(" +
+
+      index +
+
+      ")'>" +
+
+      "Delete" +
+
+      "</button>" +
+
+      "</div>";
+
 
     box.appendChild(item);
 
   });
+
 }
 
 
-/* -------------------------
-   START
-------------------------- */
+/* =========================
+   HOME
+========================= */
 
-updateMoney();
-updateTasks();
-updateHomework();
-updateWork();
+function updateHome() {
 
-</script>
+  var today =
+    new Date()
+      .toISOString()
+      .split("T")[0];
 
-</body>
-</html>
+
+  /* TASKS */
+
+  var taskBox =
+    document.getElementById("homeTasks");
+
+
+  var todayTasks =
+    tasks.filter(function(t) {
+
+      return (
+        t.date === today &&
+        !t.done
+      );
+
+    });
+
+
+  if (todayTasks.length === 0) {
+
+    taskBox.innerHTML =
+      '<div class="empty">No tasks today.</div>';
+
+  } else {
+
+    taskBox.innerHTML = "";
+
+
+    todayTasks.forEach(function(t) {
+
+      var item =
+        document.createElement("div");
+
+
+      item.className =
+        "item";
+
+
+      item.innerHTML =
+
+        "<div class='item-title'>" +
+
+        "✓ " +
+
+        t.name +
+
+        "</div>" +
+
+        "<div class='item-info'>" +
+
+        (t.time || "") +
+
+        "</div>" +
+
+        "<div class='item-info'>" +
+
+        (t.location || "") +
+
+        "</div>";
+
+
+      taskBo
