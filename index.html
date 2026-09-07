@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Task App</title>
+<title>My Day</title>
 
 <style>
-
 * {
   box-sizing: border-box;
 }
@@ -15,111 +13,90 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f4f7ff;
-  color: #222;
+  background: #f4f8ff;
+  color: #172033;
+  padding-bottom: 80px;
 }
 
 header {
   background: white;
-  padding: 20px;
+  padding: 22px 18px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dbe7f7;
 }
 
 header h1 {
   margin: 0;
-  color: #3f5fe8;
-}
-
-header p {
-  margin: 7px 0 0;
-  color: #777;
-}
-
-.sun {
-  font-size: 25px;
-  margin-right: 5px;
+  color: #1769d2;
+  font-size: 28px;
 }
 
 .page {
   display: none;
-  padding: 20px;
-  padding-bottom: 100px;
-  max-width: 700px;
+  padding: 18px;
+  max-width: 650px;
   margin: auto;
 }
 
-.page.show {
+.page.active {
   display: block;
+}
+
+h2 {
+  color: #1769d2;
+  margin-top: 5px;
 }
 
 .card {
   background: white;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 16px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.08);
-}
-
-.card h2 {
-  margin-top: 0;
-}
-
-.balance {
-  font-size: 36px;
-  font-weight: bold;
-  color: #222;
-  margin: 10px 0;
+  padding: 16px;
+  margin: 12px 0;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 input,
-select,
-button {
+select {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   margin: 6px 0;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #cbd8ea;
+  border-radius: 9px;
   font-size: 16px;
+  background: white;
 }
 
 button {
-  background: #6375ff;
-  color: white;
   border: none;
-  font-weight: bold;
+  border-radius: 9px;
+  padding: 11px 15px;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-button:active {
-  transform: scale(.98);
+.blue {
+  background: #1769d2;
+  color: white;
 }
 
-.money-button {
-  margin-top: 5px;
+.delete {
+  background: #e53935;
+  color: white;
+  margin-left: 5px;
 }
 
-.dropdown-button {
-  background: #eef1ff;
-  color: #3f5fe8;
-  text-align: left;
-  margin-top: 0;
-}
-
-.dropdown-content {
-  display: none;
-  margin-top: 10px;
-}
-
-.dropdown-content.show {
-  display: block;
+.done {
+  background: #2e9d50;
+  color: white;
 }
 
 .item {
-  padding: 14px;
-  margin-top: 10px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: #fff;
+  border-top: 1px solid #e2e8f0;
+  padding: 12px 0;
+}
+
+.item:first-child {
+  border-top: none;
 }
 
 .item-title {
@@ -127,1502 +104,556 @@ button:active {
   font-size: 17px;
 }
 
-.item-info {
-  color: #666;
-  margin-top: 5px;
+.small {
+  color: #65748b;
   font-size: 14px;
+  margin-top: 4px;
 }
 
-.item-buttons {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
+.balance {
+  font-size: 32px;
+  font-weight: bold;
+  color: #1769d2;
 }
 
-.item-buttons button {
-  margin: 0;
-  flex: 1;
+details {
+  margin-top: 15px;
 }
 
-.done-button {
-  background: #6375ff;
-}
-
-.delete-button {
-  background: #e45d5d;
-}
-
-.empty {
-  color: #777;
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: #1769d2;
   padding: 8px 0;
 }
 
-.icon {
-  margin-right: 7px;
-}
-
-.nav {
+.bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  height: 70px;
   background: white;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #dbe7f7;
   display: flex;
-  z-index: 9999;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
 }
 
-.nav button {
-  flex: 1;
-  background: white;
-  color: #555;
-  border-radius: 0;
-  margin: 0;
-  padding: 10px 3px;
+.bottom-nav button {
+  background: transparent;
+  color: #52627a;
   font-size: 12px;
+  padding: 7px 8px;
 }
 
-.nav button.active {
-  color: #3f5fe8;
+.bottom-nav button.active {
+  color: #1769d2;
   font-weight: bold;
 }
 
-.nav-icon {
-  display: block;
-  font-size: 21px;
-  margin-bottom: 3px;
+.empty {
+  color: #78879b;
+  text-align: center;
+  padding: 12px;
 }
-
-.section-title {
-  font-size: 19px;
-  margin-bottom: 10px;
-}
-
 </style>
 </head>
 
 <body>
 
-
-<!-- HEADER -->
-
 <header>
-
-  <h1>
-    <span class="sun">☀️</span>
-    My Day
-  </h1>
-
-  <p id="date"></p>
-
+  <h1>☀️ My Day</h1>
 </header>
 
-
-<!-- =========================
-     HOME
-========================= -->
-
-<div id="home" class="page show">
+<!-- HOME -->
+<div id="home" class="page active">
+  <h2>🏠 Home</h2>
 
   <div class="card">
-
-    <h2>
-      <span class="icon">💵</span>
-      Balance
-    </h2>
-
-    <div
-      class="balance"
-      id="homeBalance">
-      $0.00
-    </div>
-
+    <div>💵 Balance</div>
+    <div class="balance" id="homeBalance">$0.00</div>
   </div>
-
 
   <div class="card">
-
-    <h2>
-      <span class="icon">✓</span>
-      Today's Tasks
-    </h2>
-
-    <div id="homeTasks">
-      No tasks today.
-    </div>
-
+    <h3>✓ Today's Tasks</h3>
+    <div id="todayTasks"></div>
   </div>
-
 
   <div class="card">
-
-    <h2>
-      <span class="icon">📚</span>
-      Today's Homework
-    </h2>
-
-    <div id="homeHomework">
-      No homework today.
-    </div>
-
+    <h3>📚 Today's Homework</h3>
+    <div id="todayHomework"></div>
   </div>
-
 
   <div class="card">
-
-    <h2>
-      <span class="icon">💼</span>
-      Today's Work
-    </h2>
-
-    <div id="homeWork">
-      No work today.
-    </div>
-
+    <h3>💼 Today's Work</h3>
+    <div id="todayWork"></div>
   </div>
-
 </div>
 
-
-<!-- =========================
-     MONEY
-========================= -->
-
+<!-- MONEY -->
 <div id="money" class="page">
+  <h2>💵 Money</h2>
 
   <div class="card">
+    <div class="balance" id="moneyBalance">$0.00</div>
 
-    <h2>
-      <span class="icon">💵</span>
-      Money
-    </h2>
+    <input id="moneyAmount" type="number" step="0.01" placeholder="Amount">
 
-    <div
-      class="balance"
-      id="moneyBalance">
-      $0.00
-    </div>
+    <input id="moneyReason" type="text" placeholder="Reason">
 
+    <button class="blue" onclick="addMoney()">＋ Add Money</button>
+    <button class="blue" onclick="removeMoney()">− Remove Money</button>
 
-    <input
-      id="amount"
-      type="number"
-      step="0.01"
-      placeholder="Amount"
-    >
-
-
-    <input
-      id="reason"
-      type="text"
-      placeholder="Reason"
-    >
-
-
-    <button
-      class="money-button"
-      onclick="addMoney()">
-      + Add Money
-    </button>
-
-
-    <button
-      class="money-button"
-      onclick="removeMoney()">
-      − Remove Money
-    </button>
-
+    <details>
+      <summary>Transactions</summary>
+      <div id="transactions"></div>
+    </details>
   </div>
-
-
-  <div class="card">
-
-    <button
-      class="dropdown-button"
-      onclick="toggleTransactions()">
-
-      <span class="icon">🧾</span>
-      Transactions
-      <span id="transactionArrow">▼</span>
-
-    </button>
-
-
-    <div
-      id="transactionDropdown"
-      class="dropdown-content">
-
-      <div id="transactions">
-        No transactions yet.
-      </div>
-
-    </div>
-
-  </div>
-
 </div>
 
-
-<!-- =========================
-     TO DO
-========================= -->
-
+<!-- TODO -->
 <div id="todo" class="page">
+  <h2>✓ To-Do</h2>
 
   <div class="card">
+    <input id="taskName" placeholder="Task">
 
-    <h2>
-      <span class="icon">✓</span>
-      Add Task
-    </h2>
+    <input id="taskDate" type="date">
 
+    <input id="taskDeadline" type="time">
 
-    <input
-      id="task"
-      type="text"
-      placeholder="Task"
-    >
+    <input id="taskLocation" placeholder="Location">
 
-
-    <label>Date</label>
-
-    <input
-      id="taskDate"
-      type="date"
-    >
-
-
-    <label>Deadline</label>
-
-    <input
-      id="taskTime"
-      type="time"
-    >
-
-
-    <input
-      id="taskLocation"
-      type="text"
-      placeholder="Location"
-    >
-
-
-    <button onclick="addTask()">
-      Add Task
-    </button>
-
+    <button class="blue" onclick="addTask()">＋ Add Task</button>
   </div>
-
 
   <div class="card">
-
-    <h2>
-      <span class="icon">✓</span>
-      To-Do List
-    </h2>
-
-    <div id="taskList">
-      No tasks yet.
-    </div>
-
+    <div id="taskList"></div>
   </div>
-
 </div>
 
-
-<!-- =========================
-     HOMEWORK
-========================= -->
-
+<!-- HOMEWORK -->
 <div id="homework" class="page">
+  <h2>📚 Homework</h2>
 
   <div class="card">
+    <input id="hwName" placeholder="Assignment">
 
-    <h2>
-      <span class="icon">📚</span>
-      Add Homework
-    </h2>
+    <input id="hwClass" placeholder="Class">
 
+    <input id="hwDate" type="date">
 
-    <input
-      id="assignment"
-      type="text"
-      placeholder="Assignment"
-    >
+    <input id="hwTime" type="time">
 
+    <input id="hwDuration" type="number" placeholder="Time to do it (minutes)">
 
-    <input
-      id="className"
-      type="text"
-      placeholder="Class"
-    >
-
-
-    <label>Due date</label>
-
-    <input
-      id="dueDate"
-      type="date"
-    >
-
-
-    <label>Due time</label>
-
-    <input
-      id="dueTime"
-      type="time"
-    >
-
-
-    <label>Time to do it</label>
-
-    <input
-      id="doTime"
-      type="time"
-    >
-
-
-    <select id="priority">
-
-      <option>Normal</option>
-      <option>High</option>
-      <option>Low</option>
-
+    <select id="hwPriority">
+      <option value="Low">Low Priority</option>
+      <option value="Medium" selected>Medium Priority</option>
+      <option value="High">High Priority</option>
     </select>
 
-
-    <button onclick="addHomework()">
-      Add Homework
-    </button>
-
+    <button class="blue" onclick="addHomework()">＋ Add Homework</button>
   </div>
-
 
   <div class="card">
-
-    <h2>
-      <span class="icon">📚</span>
-      Homework
-    </h2>
-
-    <div id="homeworkList">
-      No homework yet.
-    </div>
-
+    <div id="homeworkList"></div>
   </div>
-
 </div>
 
-
-<!-- =========================
-     WORK
-========================= -->
-
+<!-- WORK -->
 <div id="work" class="page">
+  <h2>💼 Work</h2>
 
   <div class="card">
+    <input id="workName" placeholder="Work">
 
-    <h2>
-      <span class="icon">💼</span>
-      Add Work
-    </h2>
+    <input id="workLocation" placeholder="Location">
 
+    <input id="workDate" type="date">
 
-    <input
-      id="workName"
-      type="text"
-      placeholder="Job / Shift"
-    >
+    <input id="workStart" type="time">
 
+    <input id="workEnd" type="time">
 
-    <input
-      id="workLocation"
-      type="text"
-      placeholder="Location"
-    >
-
-
-    <label>Date</label>
-
-    <input
-      id="workDate"
-      type="date"
-    >
-
-
-    <label>Start time</label>
-
-    <input
-      id="workStart"
-      type="time"
-    >
-
-
-    <label>End time</label>
-
-    <input
-      id="workEnd"
-      type="time"
-    >
-
-
-    <button onclick="addWork()">
-      Add Work
-    </button>
-
+    <button class="blue" onclick="addWork()">＋ Add Work</button>
   </div>
-
 
   <div class="card">
-
-    <h2>
-      <span class="icon">💼</span>
-      Work
-    </h2>
-
-    <div id="workList">
-      No work yet.
-    </div>
-
+    <div id="workList"></div>
   </div>
-
 </div>
 
-
-<!-- =========================
-     BOTTOM NAV
-========================= -->
-
-<div class="nav">
-
-  <button
-    id="button-home"
-    class="active"
-    onclick="showPage('home')">
-
-    <span class="nav-icon">🏠</span>
-    Home
-
-  </button>
-
-
-  <button
-    id="button-money"
-    onclick="showPage('money')">
-
-    <span class="nav-icon">💵</span>
-    Money
-
-  </button>
-
-
-  <button
-    id="button-todo"
-    onclick="showPage('todo')">
-
-    <span class="nav-icon">✓</span>
-    To-Do
-
-  </button>
-
-
-  <button
-    id="button-homework"
-    onclick="showPage('homework')">
-
-    <span class="nav-icon">📚</span>
-    Homework
-
-  </button>
-
-
-  <button
-    id="button-work"
-    onclick="showPage('work')">
-
-    <span class="nav-icon">💼</span>
-    Work
-
-  </button>
-
+<!-- NAVIGATION -->
+<div class="bottom-nav">
+  <button id="nav-home" onclick="showPage('home')">🏠<br>Home</button>
+  <button id="nav-money" onclick="showPage('money')">💵<br>Money</button>
+  <button id="nav-todo" onclick="showPage('todo')">✓<br>To-Do</button>
+  <button id="nav-homework" onclick="showPage('homework')">📚<br>Homework</button>
+  <button id="nav-work" onclick="showPage('work')">💼<br>Work</button>
 </div>
-
 
 <script>
+let balance = Number(localStorage.getItem("balance")) || 0;
+let transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
+let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+let homework = JSON.parse(localStorage.getItem("homework") || "[]");
+let work = JSON.parse(localStorage.getItem("work") || "[]");
 
-
-/* =========================
-   TAB SWITCHING
-========================= */
-
-function showPage(pageName) {
-
-  var pages =
-    document.getElementsByClassName("page");
-
-  for (var i = 0; i < pages.length; i++) {
-
-    pages[i].classList.remove("show");
-
-  }
-
-
-  document
-    .getElementById(pageName)
-    .classList.add("show");
-
-
-  var buttons =
-    document.querySelectorAll(".nav button");
-
-  for (var j = 0; j < buttons.length; j++) {
-
-    buttons[j].classList.remove("active");
-
-  }
-
-
-  document
-    .getElementById("button-" + pageName)
-    .classList.add("active");
-
+function saveAll() {
+  localStorage.setItem("balance", balance);
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  localStorage.setItem("homework", JSON.stringify(homework));
+  localStorage.setItem("work", JSON.stringify(work));
 }
 
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(function(p) {
+    p.classList.remove("active");
+  });
 
-/* =========================
-   DATE
-========================= */
+  document.getElementById(page).classList.add("active");
 
-document.getElementById("date").innerHTML =
-  new Date().toLocaleDateString(
-    undefined,
-    {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-      year: "numeric"
-    }
-  );
+  document.querySelectorAll(".bottom-nav button").forEach(function(b) {
+    b.classList.remove("active");
+  });
 
+  document.getElementById("nav-" + page).classList.add("active");
 
-/* =========================
-   MONEY
-========================= */
-
-var balance =
-  Number(localStorage.getItem("balance")) || 0;
-
-
-var transactions =
-  JSON.parse(
-    localStorage.getItem("transactions") || "[]"
-  );
-
-
-function saveMoney() {
-
-  localStorage.setItem(
-    "balance",
-    balance
-  );
-
-  localStorage.setItem(
-    "transactions",
-    JSON.stringify(transactions)
-  );
-
+  renderAll();
 }
 
+function moneyFormat(amount) {
+  return "$" + Number(amount).toFixed(2);
+}
 
 function addMoney() {
+  const amount = Number(document.getElementById("moneyAmount").value);
+  const reason = document.getElementById("moneyReason").value.trim();
 
-  var amount =
-    Number(
-      document.getElementById("amount").value
-    );
-
-
-  var reason =
-    document.getElementById("reason").value.trim();
-
-
-  if (amount <= 0 || !reason) {
-
-    alert("Enter an amount and a reason.");
-
+  if (!amount || amount <= 0) {
+    alert("Enter an amount.");
     return;
-
   }
-
 
   balance += amount;
 
-
-  transactions.push({
-
+  transactions.unshift({
     amount: amount,
-
-    reason: reason,
-
-    type: "+",
-
-    date:
-      new Date().toLocaleDateString()
-
+    reason: reason || "Added money",
+    type: "add",
+    date: new Date().toLocaleString()
   });
 
+  document.getElementById("moneyAmount").value = "";
+  document.getElementById("moneyReason").value = "";
 
-  saveMoney();
-
-
-  document.getElementById("amount").value = "";
-
-  document.getElementById("reason").value = "";
-
-
-  updateMoney();
-
+  saveAll();
+  renderAll();
 }
 
-
 function removeMoney() {
+  const amount = Number(document.getElementById("moneyAmount").value);
+  const reason = document.getElementById("moneyReason").value.trim();
 
-  var amount =
-    Number(
-      document.getElementById("amount").value
-    );
-
-
-  var reason =
-    document.getElementById("reason").value.trim();
-
-
-  if (amount <= 0 || !reason) {
-
-    alert("Enter an amount and a reason.");
-
+  if (!amount || amount <= 0) {
+    alert("Enter an amount.");
     return;
-
   }
-
 
   balance -= amount;
 
-
-  transactions.push({
-
+  transactions.unshift({
     amount: amount,
-
-    reason: reason,
-
-    type: "-",
-
-    date:
-      new Date().toLocaleDateString()
-
+    reason: reason || "Removed money",
+    type: "remove",
+    date: new Date().toLocaleString()
   });
 
+  document.getElementById("moneyAmount").value = "";
+  document.getElementById("moneyReason").value = "";
 
-  saveMoney();
-
-
-  document.getElementById("amount").value = "";
-
-  document.getElementById("reason").value = "";
-
-
-  updateMoney();
-
+  saveAll();
+  renderAll();
 }
-
-
-function updateMoney() {
-
-  document.getElementById("moneyBalance").innerHTML =
-    "$" + balance.toFixed(2);
-
-
-  document.getElementById("homeBalance").innerHTML =
-    "$" + balance.toFixed(2);
-
-
-  var box =
-    document.getElementById("transactions");
-
-
-  if (transactions.length === 0) {
-
-    box.innerHTML =
-      '<div class="empty">No transactions yet.</div>';
-
-    return;
-
-  }
-
-
-  box.innerHTML = "";
-
-
-  transactions
-    .slice()
-    .reverse()
-    .forEach(function(t) {
-
-      var item =
-        document.createElement("div");
-
-
-      item.className = "item";
-
-
-      item.innerHTML =
-
-        "<div class='item-title'>" +
-
-        t.type +
-
-        "$" +
-
-        Number(t.amount).toFixed(2) +
-
-        "</div>" +
-
-        "<div class='item-info'>" +
-
-        t.reason +
-
-        "</div>" +
-
-        "<div class='item-info'>" +
-
-        (t.date || "") +
-
-        "</div>";
-
-
-      box.appendChild(item);
-
-    });
-
-}
-
-
-function toggleTransactions() {
-
-  var box =
-    document.getElementById(
-      "transactionDropdown"
-    );
-
-
-  var arrow =
-    document.getElementById(
-      "transactionArrow"
-    );
-
-
-  box.classList.toggle("show");
-
-
-  if (box.classList.contains("show")) {
-
-    arrow.innerHTML = "▲";
-
-  } else {
-
-    arrow.innerHTML = "▼";
-
-  }
-
-}
-
-
-/* =========================
-   TASKS
-========================= */
-
-var tasks =
-  JSON.parse(
-    localStorage.getItem("tasks") || "[]"
-  );
-
 
 function addTask() {
-
-  var name =
-    document.getElementById("task").value.trim();
-
+  const name = document.getElementById("taskName").value.trim();
 
   if (!name) {
-
     alert("Enter a task.");
-
     return;
-
   }
-
 
   tasks.push({
-
+    id: Date.now(),
     name: name,
-
-    date:
-      document.getElementById("taskDate").value,
-
-    time:
-      document.getElementById("taskTime").value,
-
-    location:
-      document.getElementById("taskLocation").value,
-
+    date: document.getElementById("taskDate").value,
+    deadline: document.getElementById("taskDeadline").value,
+    location: document.getElementById("taskLocation").value.trim(),
     done: false
-
   });
 
-
-  localStorage.setItem(
-    "tasks",
-    JSON.stringify(tasks)
-  );
-
-
-  document.getElementById("task").value = "";
-
+  document.getElementById("taskName").value = "";
   document.getElementById("taskDate").value = "";
-
-  document.getElementById("taskTime").value = "";
-
+  document.getElementById("taskDeadline").value = "";
   document.getElementById("taskLocation").value = "";
 
-
-  updateTasks();
-
-  updateHome();
-
+  saveAll();
+  renderAll();
 }
-
-
-function completeTask(index) {
-
-  tasks[index].done =
-    !tasks[index].done;
-
-
-  localStorage.setItem(
-    "tasks",
-    JSON.stringify(tasks)
-  );
-
-
-  updateTasks();
-
-  updateHome();
-
-}
-
-
-function deleteTask(index) {
-
-  tasks.splice(index, 1);
-
-
-  localStorage.setItem(
-    "tasks",
-    JSON.stringify(tasks)
-  );
-
-
-  updateTasks();
-
-  updateHome();
-
-}
-
-
-function updateTasks() {
-
-  var box =
-    document.getElementById("taskList");
-
-
-  if (tasks.length === 0) {
-
-    box.innerHTML =
-      '<div class="empty">No tasks yet.</div>';
-
-    return;
-
-  }
-
-
-  box.innerHTML = "";
-
-
-  tasks.forEach(function(t, index) {
-
-    var item =
-      document.createElement("div");
-
-
-    item.className =
-      "item";
-
-
-    item.innerHTML =
-
-      "<div class='item-title'>" +
-
-      "✓ " +
-
-      t.name +
-
-      "</div>" +
-
-      "<div class='item-info'>" +
-
-      (t.date || "No date") +
-
-      "</div>" +
-
-      "<div class='item-info'>" +
-
-      (t.time || "") +
-
-      "</div>" +
-
-      "<div class='item-info'>" +
-
-      (t.location || "") +
-
-      "</div>" +
-
-
-      "<div class='item-buttons'>" +
-
-      "<button class='done-button' onclick='completeTask(" +
-
-      index +
-
-      ")'>" +
-
-      (t.done ? "Undo" : "Done") +
-
-      "</button>" +
-
-
-      "<button class='delete-button' onclick='deleteTask(" +
-
-      index +
-
-      ")'>" +
-
-      "Delete" +
-
-      "</button>" +
-
-      "</div>";
-
-
-    box.appendChild(item);
-
-  });
-
-}
-
-
-/* =========================
-   HOMEWORK
-========================= */
-
-var homework =
-  JSON.parse(
-    localStorage.getItem("homework") || "[]"
-  );
-
 
 function addHomework() {
-
-  var name =
-    document
-      .getElementById("assignment")
-      .value.trim();
-
+  const name = document.getElementById("hwName").value.trim();
 
   if (!name) {
-
     alert("Enter an assignment.");
-
     return;
-
   }
-
 
   homework.push({
-
+    id: Date.now(),
     name: name,
-
-    className:
-      document.getElementById("className").value,
-
-    dueDate:
-      document.getElementById("dueDate").value,
-
-    dueTime:
-      document.getElementById("dueTime").value,
-
-    doTime:
-      document.getElementById("doTime").value,
-
-    priority:
-      document.getElementById("priority").value,
-
+    className: document.getElementById("hwClass").value.trim(),
+    date: document.getElementById("hwDate").value,
+    time: document.getElementById("hwTime").value,
+    duration: document.getElementById("hwDuration").value,
+    priority: document.getElementById("hwPriority").value,
     done: false
-
   });
 
+  document.getElementById("hwName").value = "";
+  document.getElementById("hwClass").value = "";
+  document.getElementById("hwDate").value = "";
+  document.getElementById("hwTime").value = "";
+  document.getElementById("hwDuration").value = "";
 
-  localStorage.setItem(
-    "homework",
-    JSON.stringify(homework)
-  );
-
-
-  document.getElementById("assignment").value = "";
-
-  document.getElementById("className").value = "";
-
-  document.getElementById("dueDate").value = "";
-
-  document.getElementById("dueTime").value = "";
-
-  document.getElementById("doTime").value = "";
-
-
-  updateHomework();
-
-  updateHome();
-
+  saveAll();
+  renderAll();
 }
-
-
-function completeHomework(index) {
-
-  homework[index].done =
-    !homework[index].done;
-
-
-  localStorage.setItem(
-    "homework",
-    JSON.stringify(homework)
-  );
-
-
-  updateHomework();
-
-  updateHome();
-
-}
-
-
-function deleteHomework(index) {
-
-  homework.splice(index, 1);
-
-
-  localStorage.setItem(
-    "homework",
-    JSON.stringify(homework)
-  );
-
-
-  updateHomework();
-
-  updateHome();
-
-}
-
-
-function updateHomework() {
-
-  var box =
-    document.getElementById("homeworkList");
-
-
-  if (homework.length === 0) {
-
-    box.innerHTML =
-      '<div class="empty">No homework yet.</div>';
-
-    return;
-
-  }
-
-
-  box.innerHTML = "";
-
-
-  homework.forEach(function(h, index) {
-
-    var item =
-      document.createElement("div");
-
-
-    item.className =
-      "item";
-
-
-    item.innerHTML =
-
-      "<div class='item-title'>" +
-
-      "📚 " +
-
-      h.name +
-
-      "</div>" +
-
-      "<div class='item-info'>" +
-
-      (h.className || "") +
-
-      "</div>" +
-
-      "<div class='item-info'>" +
-
-      "Due: " +
-
-      (h.dueDate || "No date") +
-
-      " " +
-
-      (h.dueTime || "") +
-
-      "</div>" +
-
-      "<div class='item-info'>" +
-
-      "Do it: " +
-
-      (h.doTime || "") +
-
-      "</div>" +
-
-      "<div class='item-info'>" +
-
-      "Priority: " +
-
-      h.priority +
-
-      "</div>" +
-
-
-      "<div class='item-buttons'>" +
-
-      "<button class='done-button' onclick='completeHomework(" +
-
-      index +
-
-      ")'>" +
-
-      (h.done ? "Undo" : "Done") +
-
-      "</button>" +
-
-
-      "<button class='delete-button' onclick='deleteHomework(" +
-
-      index +
-
-      ")'>" +
-
-      "Delete" +
-
-      "</button>" +
-
-      "</div>";
-
-
-    box.appendChild(item);
-
-  });
-
-}
-
-
-/* =========================
-   WORK
-========================= */
-
-var work =
-  JSON.parse(
-    localStorage.getItem("work") || "[]"
-  );
-
 
 function addWork() {
-
-  var name =
-    document
-      .getElementById("workName")
-      .value.trim();
-
+  const name = document.getElementById("workName").value.trim();
 
   if (!name) {
-
-    alert("Enter the work name.");
-
+    alert("Enter the work.");
     return;
-
   }
-
 
   work.push({
-
+    id: Date.now(),
     name: name,
-
-    location:
-      document.getElementById("workLocation").value,
-
-    date:
-      document.getElementById("workDate").value,
-
-    start:
-      document.getElementById("workStart").value,
-
-    end:
-      document.getElementById("workEnd").value,
-
+    location: document.getElementById("workLocation").value.trim(),
+    date: document.getElementById("workDate").value,
+    start: document.getElementById("workStart").value,
+    end: document.getElementById("workEnd").value,
     done: false
-
   });
-
-
-  localStorage.setItem(
-    "work",
-    JSON.stringify(work)
-  );
-
 
   document.getElementById("workName").value = "";
-
   document.getElementById("workLocation").value = "";
-
   document.getElementById("workDate").value = "";
-
   document.getElementById("workStart").value = "";
-
   document.getElementById("workEnd").value = "";
 
-
-  updateWork();
-
-  updateHome();
-
+  saveAll();
+  renderAll();
 }
 
-
-function completeWork(index) {
-
-  work[index].done =
-    !work[index].done;
-
-
-  localStorage.setItem(
-    "work",
-    JSON.stringify(work)
-  );
-
-
-  updateWork();
-
-  updateHome();
-
+function doneTask(id) {
+  const item = tasks.find(x => x.id === id);
+  if (item) item.done = true;
+  saveAll();
+  renderAll();
 }
 
-
-function deleteWork(index) {
-
-  work.splice(index, 1);
-
-
-  localStorage.setItem(
-    "work",
-    JSON.stringify(work)
-  );
-
-
-  updateWork();
-
-  updateHome();
-
+function deleteTask(id) {
+  tasks = tasks.filter(x => x.id !== id);
+  saveAll();
+  renderAll();
 }
 
+function doneHomework(id) {
+  const item = homework.find(x => x.id === id);
+  if (item) item.done = true;
+  saveAll();
+  renderAll();
+}
 
-function updateWork() {
+function deleteHomework(id) {
+  homework = homework.filter(x => x.id !== id);
+  saveAll();
+  renderAll();
+}
 
-  var box =
-    document.getElementById("workList");
+function doneWork(id) {
+  const item = work.find(x => x.id === id);
+  if (item) item.done = true;
+  saveAll();
+  renderAll();
+}
 
+function deleteWork(id) {
+  work = work.filter(x => x.id !== id);
+  saveAll();
+  renderAll();
+}
 
-  if (work.length === 0) {
+function todayString() {
+  const d = new Date();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return d.getFullYear() + "-" + month + "-" + day;
+}
 
-    box.innerHTML =
-      '<div class="empty">No work yet.</div>';
+function taskHTML(item) {
+  return `
+    <div class="item">
+      <div class="item-title">${escapeHTML(item.name)}</div>
+      ${item.deadline ? `<div class="small">⏰ ${item.deadline}</div>` : ""}
+      ${item.location ? `<div class="small">📍 ${escapeHTML(item.location)}</div>` : ""}
+      <br>
+      <button class="done" onclick="doneTask(${item.id})">Done</button>
+      <button class="delete" onclick="deleteTask(${item.id})">Delete</button>
+    </div>
+  `;
+}
 
+function homeworkHTML(item) {
+  return `
+    <div class="item">
+      <div class="item-title">${escapeHTML(item.name)}</div>
+      ${item.className ? `<div class="small">Class: ${escapeHTML(item.className)}</div>` : ""}
+      ${item.time ? `<div class="small">⏰ ${item.time}</div>` : ""}
+      ${item.duration ? `<div class="small">⌛ ${item.duration} minutes</div>` : ""}
+      <div class="small">Priority: ${escapeHTML(item.priority)}</div>
+      <br>
+      <button class="done" onclick="doneHomework(${item.id})">Done</button>
+      <button class="delete" onclick="deleteHomework(${item.id})">Delete</button>
+    </div>
+  `;
+}
+
+function workHTML(item) {
+  return `
+    <div class="item">
+      <div class="item-title">${escapeHTML(item.name)}</div>
+      ${item.location ? `<div class="small">📍 ${escapeHTML(item.location)}</div>` : ""}
+      ${item.start ? `<div class="small">⏰ ${item.start}${item.end ? " - " + item.end : ""}</div>` : ""}
+      <br>
+      <button class="done" onclick="doneWork(${item.id})">Done</button>
+      <button class="delete" onclick="deleteWork(${item.id})">Delete</button>
+    </div>
+  `;
+}
+
+function escapeHTML(text) {
+  return String(text || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function renderMoney() {
+  document.getElementById("moneyBalance").textContent = moneyFormat(balance);
+  document.getElementById("homeBalance").textContent = moneyFormat(balance);
+
+  const box = document.getElementById("transactions");
+
+  if (transactions.length === 0) {
+    box.innerHTML = '<div class="empty">No transactions yet.</div>';
     return;
-
   }
 
-
-  box.innerHTML = "";
-
-
-  work.forEach(function(w, index) {
-
-    var item =
-      document.createElement("div");
-
-
-    item.className =
-      "item";
-
-
-    item.innerHTML =
-
-      "<div class='item-title'>" +
-
-      "💼 " +
-
-      w.name +
-
-      "</div>" +
-
-      "<div class='item-info'>" +
-
-      (w.location || "") +
-
-      "</div>" +
-
-      "<div class='item-info'>" +
-
-      (w.date || "No date") +
-
-      "</div>" +
-
-      "<div class='item-info'>" +
-
-      (w.start || "") +
-
-      " - " +
-
-      (w.end || "") +
-
-      "</div>" +
-
-
-      "<div class='item-buttons'>" +
-
-      "<button class='done-button' onclick='completeWork(" +
-
-      index +
-
-      ")'>" +
-
-      (w.done ? "Undo" : "Done") +
-
-      "</button>" +
-
-
-      "<button class='delete-button' onclick='deleteWork(" +
-
-      index +
-
-      ")'>" +
-
-      "Delete" +
-
-      "</button>" +
-
-      "</div>";
-
-
-    box.appendChild(item);
-
-  });
-
+  box.innerHTML = transactions.map(t => `
+    <div class="item">
+      <div class="item-title">
+        ${t.type === "add" ? "＋" : "−"} ${moneyFormat(t.amount)}
+      </div>
+      <div class="small">${escapeHTML(t.reason)}</div>
+      <div class="small">${escapeHTML(t.date)}</div>
+    </div>
+  `).join("");
 }
 
+function renderTasks() {
+  const box = document.getElementById("taskList");
 
-/* =========================
-   HOME
-========================= */
+  const active = tasks.filter(x => !x.done);
 
-function updateHome() {
+  if (active.length === 0) {
+    box.innerHTML = '<div class="empty">No tasks.</div>';
+    return;
+  }
 
-  var today =
-    new Date()
-      .toISOString()
-      .split("T")[0];
+  box.innerHTML = active.map(taskHTML).join("");
+}
 
+function renderHomework() {
+  const box = document.getElementById("homeworkList");
 
-  /* TASKS */
+  const active = homework.filter(x => !x.done);
 
-  var taskBox =
-    document.getElementById("homeTasks");
+  if (active.length === 0) {
+    box.innerHTML = '<div class="empty">No homework.</div>';
+    return;
+  }
 
+  box.innerHTML = active.map(homeworkHTML).join("");
+}
 
-  var todayTasks =
-    tasks.filter(function(t) {
+function renderWork() {
+  const box = document.getElementById("workList");
 
-      return (
-        t.date === today &&
-        !t.done
-      );
+  const active = work.filter(x => !x.done);
 
-    });
+  if (active.length === 0) {
+    box.innerHTML = '<div class="empty">No work.</div>';
+    return;
+  }
 
+  box.innerHTML = active.map(workHTML).join("");
+}
 
-  if (todayTasks.length === 0) {
+function renderHome() {
+  const today = todayString();
 
-    taskBox.innerHTML =
-      '<div class="empty">No tasks today.</div>';
+  const todayTaskItems = tasks.filter(x => x.date === today && !x.done);
+  const todayHomeworkItems = homework.filter(x => x.date === today && !x.done);
+  const todayWorkItems = work.filter(x => x.date === today && !x.done);
 
-  } else {
+  document.getElementById("todayTasks").innerHTML =
+    todayTaskItems.length
+      ? todayTaskItems.map(taskHTML).join("")
+      : '<div class="empty">No tasks today.</div>';
 
-    taskBox.innerHTML = "";
+  document.getElementById("todayHomework").innerHTML =
+    todayHomeworkItems.length
+      ? todayHomeworkItems.map(homeworkHTML).join("")
+      : '<div class="empty">No homework today.</div>';
 
+  document.getElementById("todayWork").innerHTML =
+    todayWorkItems.length
+      ? todayWorkItems.map(workHTML).join("")
+      : '<div class="empty">No work today.</div>';
+}
 
-    todayTasks.forEach(function(t) {
+function renderAll() {
+  renderMoney();
+  renderTasks();
+  renderHomework();
+  renderWork();
+  renderHome();
+}
 
-      var item =
-        document.createElement("div");
+renderAll();
+document.getElementById("nav-home").classList.add("active");
+</script>
 
-
-      item.className =
-        "item";
-
-
-      item.innerHTML =
-
-        "<div class='item-title'>" +
-
-        "✓ " +
-
-        t.name +
-
-        "</div>" +
-
-        "<div class='item-info'>" +
-
-        (t.time || "") +
-
-        "</div>" +
-
-        "<div class='item-info'>" +
-
-        (t.location || "") +
-
-        "</div>";
-
-
-      taskBo
+</body>
+</html>
