@@ -12,60 +12,59 @@
 
 body {
   margin: 0;
+  padding: 0 0 80px 0;
   font-family: Arial, sans-serif;
   background: #f4f7fb;
   color: #172033;
-  padding-bottom: 80px;
 }
 
-/* HEADER */
-
 header {
+  min-height: 76px;
   background: white;
-  padding: 12px 14px;
-  border-bottom: 1px solid #ddd;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  min-height: 76px;
+  padding: 12px 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  position: sticky;
+  top: 0;
+  z-index: 900;
 }
 
 .header-left {
   text-align: left;
   font-size: 13px;
-  color: #667080;
-  line-height: 1.4;
+  color: #667085;
 }
 
 .header-time {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
   color: #172033;
 }
 
 .header-title {
-  text-align: center;
-  font-size: 21px;
+  font-size: 22px;
   font-weight: bold;
+  text-align: center;
 }
 
 .header-profile {
-  text-align: right;
-  color: #172033;
-  font-size: 13px;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
 }
 
 .profile-icon {
   font-size: 22px;
-  display: block;
 }
-
-/* PAGES */
 
 .page {
   display: none;
-  padding: 20px;
-  max-width: 650px;
+  padding: 20px 16px;
+  max-width: 700px;
   margin: auto;
 }
 
@@ -73,70 +72,69 @@ header {
   display: block;
 }
 
-/* CARDS */
+h2 {
+  margin-top: 0;
+}
+
+.section-title {
+  margin: 24px 0 10px;
+  font-size: 18px;
+}
 
 .card {
   background: white;
   border-radius: 16px;
   padding: 16px;
-  margin-bottom: 14px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+  margin-bottom: 16px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
 }
 
-/* ADD BUTTONS */
-
 .add-button {
+  display: block;
   width: 100%;
   border: none;
+  border-radius: 10px;
+  padding: 13px;
   background: #1976d2;
   color: white;
-  padding: 12px 16px;
-  border-radius: 10px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
-.add-form {
+.form {
   display: none;
 }
 
-.add-form.open {
+.form.open {
   display: block;
 }
-
-/* INPUTS */
 
 input,
 select {
   width: 100%;
-  padding: 11px;
-  margin: 7px 0;
-  border: 1px solid #ccd3dd;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #d0d5dd;
   border-radius: 9px;
   font-size: 15px;
   background: white;
 }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-top: 8px;
-}
-
 .preset-row {
   display: flex;
   gap: 8px;
-  margin: 7px 0;
+  margin-bottom: 10px;
 }
 
 .preset-button {
+  flex: 1;
+  padding: 10px;
   border: none;
-  background: #e4f0ff;
-  color: #1976d2;
-  padding: 9px 12px;
   border-radius: 8px;
+  background: #e3f2fd;
+  color: #1565c0;
   font-weight: bold;
   cursor: pointer;
 }
@@ -144,34 +142,22 @@ label {
 .save-button {
   width: 100%;
   border: none;
+  border-radius: 9px;
+  padding: 12px;
   background: #1976d2;
   color: white;
-  padding: 12px;
-  border-radius: 9px;
   font-size: 15px;
   font-weight: bold;
-  margin-top: 10px;
   cursor: pointer;
 }
-
-/* ITEMS */
 
 .item {
   position: relative;
   background: white;
-  border-radius: 14px;
+  border-radius: 13px;
   padding: 14px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  transition: opacity 0.2s;
-}
-
-.item.completed {
-  opacity: 0.65;
-}
-
-.item.completed .item-title {
-  text-decoration: line-through;
+  box-shadow: 0 2px 8px rgba(0,0,0,.07);
 }
 
 .item-row {
@@ -180,10 +166,10 @@ label {
   gap: 10px;
 }
 
-.item-row input[type="checkbox"] {
-  width: 21px;
-  height: 21px;
-  margin: 2px 0 0 0;
+.item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 1px 0 0;
   flex-shrink: 0;
 }
 
@@ -193,66 +179,95 @@ label {
 }
 
 .item-title {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: bold;
   margin-bottom: 5px;
   word-wrap: break-word;
 }
 
 .item-details {
-  color: #5f6b7a;
-  font-size: 14px;
+  color: #667085;
+  font-size: 13px;
   line-height: 1.5;
+}
+
+.item.completed {
+  opacity: .65;
+}
+
+.item.completed .item-title {
+  text-decoration: line-through;
 }
 
 .delete-button {
   margin-top: 10px;
   border: none;
+  border-radius: 7px;
+  padding: 7px 12px;
   background: #e53935;
   color: white;
-  padding: 7px 11px;
-  border-radius: 7px;
   font-size: 13px;
-  font-weight: bold;
   cursor: pointer;
-}
-
-.section-title {
-  margin-top: 25px;
-  margin-bottom: 10px;
 }
 
 .empty {
   text-align: center;
-  color: #788392;
-  padding: 25px 10px;
+  color: #667085;
+  padding: 22px 10px;
 }
-
-/* MONEY DROPDOWNS */
 
 .money-toggle {
   width: 100%;
   border: none;
-  background: #1976d2;
-  color: white;
-  padding: 12px 16px;
-  border-radius: 10px;
-  font-size: 16px;
+  background: transparent;
+  padding: 4px;
+  font-size: 19px;
   font-weight: bold;
-  cursor: pointer;
+  color: #172033;
   text-align: left;
+  cursor: pointer;
 }
 
 .money-dropdown {
   display: none;
-  margin-top: 12px;
+  padding-top: 14px;
 }
 
 .money-dropdown.open {
   display: block;
 }
 
-/* BOTTOM NAV */
+#balanceDisplay {
+  margin: 0;
+  font-size: 28px;
+}
+
+.transaction {
+  padding: 10px 0;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.transaction:last-child {
+  border-bottom: none;
+}
+
+.transaction-description {
+  font-weight: bold;
+}
+
+.transaction-meta {
+  font-size: 13px;
+  color: #667085;
+  margin-top: 3px;
+}
+
+.money-in {
+  color: #16803c;
+}
+
+.money-out {
+  color: #c62828;
+}
 
 .bottom-nav {
   position: fixed;
@@ -261,90 +276,103 @@ label {
   right: 0;
   height: 68px;
   background: white;
-  border-top: 1px solid #ddd;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  box-shadow: 0 -2px 10px rgba(0,0,0,.12);
   z-index: 1000;
 }
 
 .tab-button {
-  flex: 1;
   border: none;
   background: white;
-  color: #667080;
-  font-size: 12px;
+  color: #667085;
+  font-size: 11px;
+  font-weight: bold;
   cursor: pointer;
+  padding: 5px 2px;
 }
 
 .tab-button.active {
   color: #1976d2;
-  font-weight: bold;
 }
 
 .tab-icon {
   display: block;
-  font-size: 21px;
+  font-size: 20px;
   margin-bottom: 2px;
 }
 
-/* CONFETTI */
-
-.confetti-container {
+.confetti {
   position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  width: 1px;
-  height: 1px;
-}
-
-.confetti-piece {
-  position: absolute;
-  width: 7px;
+  width: 8px;
   height: 12px;
-  background: #1976d2;
-  animation: confetti-fall 900ms ease-out forwards;
-}
-
-@keyframes confetti-fall {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 1;
-  }
-
-  100% {
-    transform:
-      translate(var(--x), var(--y))
-      rotate(var(--r));
-    opacity: 0;
-  }
-}
-
-/* TRASH */
-
-.trash-popup {
-  position: fixed;
+  z-index: 3000;
   pointer-events: none;
-  z-index: 9998;
+  animation: confettiFall 900ms ease-out forwards;
 }
 
-.trash-icon {
-  font-size: 32px;
-  animation: trash-pop 1.15s ease-out forwards;
-}
-
-@keyframes trash-pop {
+@keyframes confettiFall {
   0% {
-    transform: translate(-50%, -50%) scale(0.5);
-    opacity: 0;
-  }
-
-  20% {
-    transform: translate(-50%, -50%) scale(1.05);
+    transform: translate(0,0) rotate(0deg);
     opacity: 1;
   }
 
   100% {
-    transform: translate(-50%, -90%) scale(0.7);
+    transform: translate(var(--x),var(--y)) rotate(500deg);
     opacity: 0;
+  }
+}
+
+.trash-animation {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  font-size: 28px;
+  z-index: 2500;
+  pointer-events: none;
+  animation: trashFly 1200ms ease-out forwards;
+}
+
+@keyframes trashFly {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.15) rotate(-15deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(.4) translateY(-35px) rotate(20deg);
+  }
+}
+
+@media (max-width: 500px) {
+  header {
+    padding: 10px 12px;
+  }
+
+  .header-title {
+    font-size: 19px;
+  }
+
+  .header-profile {
+    font-size: 13px;
+  }
+
+  .header-left {
+    font-size: 11px;
+  }
+
+  .header-time {
+    font-size: 14px;
+  }
+
+  .page {
+    padding: 18px 12px;
   }
 }
 </style>
@@ -352,31 +380,23 @@ label {
 
 <body>
 
-<!-- HEADER -->
-
 <header>
-
   <div class="header-left">
     <div class="header-time" id="headerTime"></div>
     <div id="headerDate"></div>
   </div>
 
-  <div class="header-title">
-    My Planner
-  </div>
+  <div class="header-title">My Planner</div>
 
   <div class="header-profile">
     <span class="profile-icon">👤</span>
     Profile
   </div>
-
 </header>
 
 
 <!-- HOME -->
-
 <section id="home" class="page active">
-
   <h2>Home</h2>
 
   <h3 class="section-title">✓ To-Do</h3>
@@ -387,255 +407,131 @@ label {
 
   <h3 class="section-title">💼 Work</h3>
   <div id="homeWork"></div>
-
 </section>
 
 
 <!-- TO-DO -->
-
 <section id="todo" class="page">
-
   <h2>To-Do</h2>
 
-  <button class="add-button" id="todoAddButton">
-    + Add To-Do
-  </button>
+  <button class="add-button" id="todoToggle">+ Add To-Do</button>
 
-  <div class="card add-form" id="todoForm">
+  <div class="card form" id="todoForm">
 
-    <label>What do you need to do?</label>
-
-    <input
-      id="taskText"
-      type="text"
-      placeholder="Example: Clean my room"
-    >
-
-    <label>When is it due? (Optional)</label>
+    <input id="todoText" type="text" placeholder="Task">
 
     <div class="preset-row">
-
-      <button
-        type="button"
-        class="preset-button"
-        onclick="setTaskDateToday()"
-      >
-        Today
-      </button>
-
-      <button
-        type="button"
-        class="preset-button"
-        onclick="setTaskDateTomorrow()"
-      >
-        Tomorrow
-      </button>
-
+      <button class="preset-button" id="todoToday" type="button">Today</button>
+      <button class="preset-button" id="todoTomorrow" type="button">Tomorrow</button>
     </div>
 
-    <input id="taskDate" type="date">
+    <input id="todoDate" type="date">
 
-    <button class="save-button" onclick="addTask()">
+    <button class="save-button" id="todoSave" type="button">
       Add To-Do
     </button>
-
   </div>
 
   <div id="tasksList"></div>
-
 </section>
 
 
 <!-- HOMEWORK -->
-
 <section id="homework" class="page">
-
   <h2>Homework</h2>
 
-  <button class="add-button" id="homeworkAddButton">
-    + Add Homework
-  </button>
+  <button class="add-button" id="homeworkToggle">+ Add Homework</button>
 
-  <div class="card add-form" id="homeworkForm">
+  <div class="card form" id="homeworkForm">
 
-    <label>Assignment</label>
+    <input id="homeworkAssignment" type="text" placeholder="Assignment">
 
-    <input
-      id="homeworkText"
-      type="text"
-      placeholder="Example: Math worksheet"
-    >
-
-    <label>Class</label>
-
-    <input
-      id="homeworkClass"
-      type="text"
-      placeholder="Example: Math"
-    >
-
-    <label>Due Date</label>
+    <input id="homeworkClass" type="text" placeholder="Class">
 
     <div class="preset-row">
-
-      <button
-        type="button"
-        class="preset-button"
-        onclick="setHomeworkDateToday()"
-      >
+      <button class="preset-button" id="homeworkToday" type="button">
         Today
       </button>
 
-      <button
-        type="button"
-        class="preset-button"
-        onclick="setHomeworkDateTomorrow()"
-      >
+      <button class="preset-button" id="homeworkTomorrow" type="button">
         Tomorrow
       </button>
-
     </div>
 
     <input id="homeworkDate" type="date">
 
-    <label>Priority</label>
-
     <select id="homeworkPriority">
-
-      <option value="Low">Low</option>
-
-      <option value="Medium" selected>
-        Medium
-      </option>
-
-      <option value="High">High</option>
-
+      <option value="Low">Low Priority</option>
+      <option value="Medium" selected>Medium Priority</option>
+      <option value="High">High Priority</option>
     </select>
 
-    <button class="save-button" onclick="addHomework()">
+    <button class="save-button" id="homeworkSave" type="button">
       Add Homework
     </button>
-
   </div>
 
   <div id="homeworkList"></div>
-
 </section>
 
 
 <!-- WORK -->
-
 <section id="work" class="page">
-
   <h2>Work</h2>
 
-  <button class="add-button" id="workAddButton">
-    + Add Work
-  </button>
+  <button class="add-button" id="workToggle">+ Add Work</button>
 
-  <div class="card add-form" id="workForm">
+  <div class="card form" id="workForm">
 
-    <label>Work</label>
+    <input id="workName" type="text" placeholder="Work">
 
-    <input
-      id="workText"
-      type="text"
-      placeholder="Example: Shift"
-    >
-
-    <label>Location</label>
-
-    <input
-      id="workLocation"
-      type="text"
-      placeholder="Example: Community Centre"
-    >
-
-    <label>Work Date</label>
+    <input id="workLocation" type="text" placeholder="Location">
 
     <div class="preset-row">
-
-      <button
-        type="button"
-        class="preset-button"
-        onclick="setWorkDateToday()"
-      >
+      <button class="preset-button" id="workToday" type="button">
         Today
       </button>
 
-      <button
-        type="button"
-        class="preset-button"
-        onclick="setWorkDateTomorrow()"
-      >
+      <button class="preset-button" id="workTomorrow" type="button">
         Tomorrow
       </button>
-
     </div>
 
     <input id="workDate" type="date">
 
-    <label>Start Time</label>
-
     <input id="workStart" type="time">
-
-    <label>End Time</label>
-
     <input id="workEnd" type="time">
 
-    <button class="save-button" onclick="addWork()">
+    <button class="save-button" id="workSave" type="button">
       Add Work
     </button>
-
   </div>
 
   <div id="workList"></div>
-
 </section>
 
 
-<!-- MONEY — SLOT 5 -->
-
+<!-- MONEY -->
 <section id="money" class="page">
-
   <h2>Money</h2>
 
   <div class="card">
-
-    <button
-      class="money-toggle"
-      id="balanceToggle"
-    >
+    <button class="money-toggle" id="balanceToggle">
       💵 Balance
     </button>
 
-    <div
-      class="money-dropdown"
-      id="balanceDropdown"
-    >
-
-      <h2 id="balanceDisplay">
-        $0.00
-      </h2>
-
+    <div class="money-dropdown" id="balanceDropdown">
+      <h2 id="balanceDisplay">$0.00</h2>
     </div>
-
   </div>
 
 
   <div class="card">
-
-    <button
-      class="money-toggle"
-      id="transactionToggle"
-    >
+    <button class="money-toggle" id="transactionToggle">
       + Transaction
     </button>
 
-    <div
-      class="money-dropdown"
-      id="transactionForm"
-    >
+    <div class="money-dropdown" id="transactionForm">
 
       <input
         id="transactionAmount"
@@ -645,15 +541,8 @@ label {
       >
 
       <select id="transactionType">
-
-        <option value="income">
-          Money In
-        </option>
-
-        <option value="expense">
-          Money Out
-        </option>
-
+        <option value="income">Money In</option>
+        <option value="expense">Money Out</option>
       </select>
 
       <input
@@ -662,81 +551,49 @@ label {
         placeholder="Description"
       >
 
-      <button
-        class="save-button"
-        onclick="addTransaction()"
-      >
+      <button class="save-button" id="transactionSave" type="button">
         Add Transaction
       </button>
-
     </div>
-
   </div>
 
 
   <div class="card">
-
-    <button
-      class="money-toggle"
-      id="historyToggle"
-    >
+    <button class="money-toggle" id="historyToggle">
       Transaction History
     </button>
 
-    <div
-      class="money-dropdown"
-      id="historyDropdown"
-    >
-
+    <div class="money-dropdown" id="historyDropdown">
       <div id="transactionsList"></div>
-
     </div>
-
   </div>
-
 </section>
 
 
 <!-- BOTTOM NAV -->
-
 <nav class="bottom-nav">
 
-  <button
-    class="tab-button active"
-    data-page="home"
-  >
+  <button class="tab-button active" data-page="home">
     <span class="tab-icon">🏠</span>
     Home
   </button>
 
-  <button
-    class="tab-button"
-    data-page="todo"
-  >
+  <button class="tab-button" data-page="todo">
     <span class="tab-icon">✓</span>
     To-Do
   </button>
 
-  <button
-    class="tab-button"
-    data-page="homework"
-  >
+  <button class="tab-button" data-page="homework">
     <span class="tab-icon">📚</span>
     Homework
   </button>
 
-  <button
-    class="tab-button"
-    data-page="work"
-  >
+  <button class="tab-button" data-page="work">
     <span class="tab-icon">💼</span>
     Work
   </button>
 
-  <button
-    class="tab-button"
-    data-page="money"
-  >
+  <button class="tab-button" data-page="money">
     <span class="tab-icon">💵</span>
     Money
   </button>
@@ -745,702 +602,466 @@ label {
 
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-/* DATA */
+  /* =========================
+     DATA
+  ========================= */
 
-let balance =
-  Number(localStorage.getItem("balance") || 0);
+  let balance = Number(localStorage.getItem("balance")) || 0;
 
-let transactions =
-  JSON.parse(
-    localStorage.getItem("transactions") || "[]"
-  );
+  let transactions =
+    JSON.parse(localStorage.getItem("transactions") || "[]");
 
-let tasks =
-  JSON.parse(
-    localStorage.getItem("tasks") || "[]"
-  );
+  let tasks =
+    JSON.parse(localStorage.getItem("tasks") || "[]");
 
-let homework =
-  JSON.parse(
-    localStorage.getItem("homework") || "[]"
-  );
+  let homework =
+    JSON.parse(localStorage.getItem("homework") || "[]");
 
-let work =
-  JSON.parse(
-    localStorage.getItem("work") || "[]"
-  );
+  let work =
+    JSON.parse(localStorage.getItem("work") || "[]");
 
 
-/* SAVE */
-
-function saveAll() {
-
-  localStorage.setItem(
-    "balance",
-    balance
-  );
-
-  localStorage.setItem(
-    "transactions",
-    JSON.stringify(transactions)
-  );
-
-  localStorage.setItem(
-    "tasks",
-    JSON.stringify(tasks)
-  );
-
-  localStorage.setItem(
-    "homework",
-    JSON.stringify(homework)
-  );
-
-  localStorage.setItem(
-    "work",
-    JSON.stringify(work)
-  );
-}
-
-
-/* HEADER CLOCK */
-
-function updateHeaderClock() {
-
-  const now = new Date();
-
-  document.getElementById(
-    "headerTime"
-  ).textContent =
-    now.toLocaleTimeString(
-      "en-US",
-      {
-        hour: "numeric",
-        minute: "2-digit"
-      }
-    );
-
-  document.getElementById(
-    "headerDate"
-  ).textContent =
-    now.toLocaleDateString(
-      "en-US",
-      {
-        month: "short",
-        day: "numeric",
-        year: "numeric"
-      }
-    );
-}
-
-updateHeaderClock();
-
-setInterval(
-  updateHeaderClock,
-  1000
-);
-
-
-/* DATES */
-
-function getDateString(date) {
-
-  return date.toISOString()
-    .split("T")[0];
-}
-
-function todayString() {
-
-  return getDateString(
-    new Date()
-  );
-}
-
-function tomorrowString() {
-
-  const date =
-    new Date();
-
-  date.setDate(
-    date.getDate() + 1
-  );
-
-  return getDateString(date);
-}
-
-function formatDate(dateString) {
-
-  if (!dateString) {
-    return "No due date";
+  function saveAll() {
+    localStorage.setItem("balance", balance);
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("homework", JSON.stringify(homework));
+    localStorage.setItem("work", JSON.stringify(work));
   }
 
-  const parts =
-    dateString.split("-");
 
-  if (parts.length !== 3) {
-    return dateString;
+  /* =========================
+     DATE / TIME
+  ========================= */
+
+  function getDateString(offsetDays) {
+    const date = new Date();
+    date.setDate(date.getDate() + offsetDays);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return year + "-" + month + "-" + day;
   }
 
-  const date =
-    new Date(
-      Number(parts[0]),
-      Number(parts[1]) - 1,
-      Number(parts[2])
-    );
 
-  return date.toLocaleDateString(
-    "en-US",
-    {
+  function formatDate(dateString) {
+    if (!dateString) return "";
+
+    const date = new Date(dateString + "T00:00:00");
+
+    return date.toLocaleDateString(undefined, {
       month: "short",
       day: "numeric",
       year: "numeric"
-    }
-  );
-}
-
-
-/* TIME */
-
-function formatTime(timeString) {
-
-  if (!timeString) {
-    return "";
+    });
   }
 
-  const parts =
-    timeString.split(":");
 
-  let hour =
-    Number(parts[0]);
+  function formatTime(timeString) {
+    if (!timeString) return "";
 
-  const minute =
-    parts[1];
+    const parts = timeString.split(":");
+    let hour = Number(parts[0]);
+    const minute = parts[1];
 
-  const ampm =
-    hour >= 12
-      ? "PM"
-      : "AM";
+    const suffix = hour >= 12 ? "PM" : "AM";
 
-  hour =
-    hour % 12 || 12;
+    hour = hour % 12;
 
-  return (
-    hour +
-    ":" +
-    minute +
-    " " +
-    ampm
-  );
-}
+    if (hour === 0) {
+      hour = 12;
+    }
+
+    return hour + ":" + minute + " " + suffix;
+  }
 
 
-/* FIND VISIBLE ITEM */
+  function updateHeaderClock() {
+    const now = new Date();
 
-function findVisibleItem(selector) {
+    document.getElementById("headerTime").textContent =
+      now.toLocaleTimeString(undefined, {
+        hour: "numeric",
+        minute: "2-digit"
+      });
 
-  const activePage =
-    document.querySelector(
-      ".page.active"
-    );
+    document.getElementById("headerDate").textContent =
+      now.toLocaleDateString(undefined, {
+        weekday: "short",
+        month: "short",
+        day: "numeric"
+      });
+  }
 
-  if (activePage) {
 
-    const item =
-      activePage.querySelector(
-        selector
+  updateHeaderClock();
+  setInterval(updateHeaderClock, 1000);
+
+
+  /* =========================
+     VISUAL HELPERS
+  ========================= */
+
+  function findVisibleItem(selector) {
+    const activePage = document.querySelector(".page.active");
+
+    if (activePage) {
+      const visibleItem = activePage.querySelector(selector);
+
+      if (visibleItem) {
+        return visibleItem;
+      }
+    }
+
+    return document.querySelector(selector);
+  }
+
+
+  function createConfettiAtElement(element) {
+    if (!element) return;
+
+    const rect = element.getBoundingClientRect();
+
+    const pieces = 18;
+
+    for (let i = 0; i < pieces; i++) {
+      const confetti = document.createElement("div");
+
+      confetti.className = "confetti";
+
+      confetti.style.left =
+        (rect.left + rect.width / 2) + "px";
+
+      confetti.style.top =
+        (rect.top + rect.height / 2) + "px";
+
+      confetti.style.setProperty(
+        "--x",
+        ((Math.random() - 0.5) * 180) + "px"
       );
 
-    if (item) {
-      return item;
+      confetti.style.setProperty(
+        "--y",
+        ((Math.random() - 0.5) * 150) + "px"
+      );
+
+      document.body.appendChild(confetti);
+
+      setTimeout(function () {
+        confetti.remove();
+      }, 950);
     }
   }
 
-  return document.querySelector(
-    selector
-  );
-}
 
+  function showTrashAtElement(element) {
+    if (!element) return;
 
-/* CONFETTI */
+    const rect = element.getBoundingClientRect();
 
-function createConfettiAtElement(element) {
+    const trash = document.createElement("div");
 
-  if (!element) {
-    return;
+    trash.className = "trash-animation";
+    trash.textContent = "🗑️";
+
+    trash.style.left =
+      (rect.left + rect.width / 2 - 16) + "px";
+
+    trash.style.top =
+      (rect.top + rect.height / 2 - 16) + "px";
+
+    document.body.appendChild(trash);
+
+    setTimeout(function () {
+      trash.remove();
+    }, 1250);
   }
 
-  const rect =
-    element.getBoundingClientRect();
 
-  const container =
-    document.createElement("div");
+  /* =========================
+     TO-DO
+  ========================= */
 
-  container.className =
-    "confetti-container";
+  function addTask() {
+    const text =
+      document.getElementById("todoText").value.trim();
 
-  container.style.left =
-    (
-      rect.left +
-      rect.width / 2
-    ) + "px";
+    const date =
+      document.getElementById("todoDate").value;
 
-  container.style.top =
-    (
-      rect.top +
-      rect.height / 2
-    ) + "px";
+    if (!text) return;
 
-  for (
-    let i = 0;
-    i < 24;
-    i++
-  ) {
+    tasks.push({
+      id: Date.now(),
+      text: text,
+      date: date,
+      done: false
+    });
 
-    const piece =
-      document.createElement("div");
+    saveAll();
 
-    piece.className =
-      "confetti-piece";
+    document.getElementById("todoText").value = "";
+    document.getElementById("todoDate").value = "";
 
-    const angle =
-      Math.random() *
-      Math.PI *
-      2;
+    document.getElementById("todoForm").classList.remove("open");
+    document.getElementById("todoToggle").textContent =
+      "+ Add To-Do";
 
-    const distance =
-      50 +
-      Math.random() *
-      100;
-
-    piece.style.setProperty(
-      "--x",
-      Math.cos(angle) *
-      distance +
-      "px"
-    );
-
-    piece.style.setProperty(
-      "--y",
-      Math.sin(angle) *
-      distance +
-      "px"
-    );
-
-    piece.style.setProperty(
-      "--r",
-      (
-        Math.random() *
-        720 -
-        360
-      ) + "deg"
-    );
-
-    container.appendChild(
-      piece
-    );
+    renderAll();
   }
 
-  document.body.appendChild(
-    container
-  );
 
-  setTimeout(
-    function() {
-      container.remove();
-    },
-    1000
-  );
-}
+  function toggleTask(id) {
+    const task = tasks.find(function (item) {
+      return item.id === id;
+    });
 
+    if (!task) return;
 
-/* TRASH */
+    if (!task.done) {
+      const element =
+        findVisibleItem('[data-task-id="' + id + '"]');
 
-function showTrashAtElement(element) {
+      createConfettiAtElement(element);
+    }
 
-  if (!element) {
-    return;
+    task.done = !task.done;
+
+    saveAll();
+    renderAll();
   }
 
-  const rect =
-    element.getBoundingClientRect();
 
-  const popup =
-    document.createElement("div");
+  function deleteTask(id) {
+    const element =
+      findVisibleItem('[data-task-id="' + id + '"]');
 
-  popup.className =
-    "trash-popup";
+    showTrashAtElement(element);
 
-  popup.style.left =
-    (
-      rect.left +
-      rect.width / 2
-    ) + "px";
+    tasks = tasks.filter(function (item) {
+      return item.id !== id;
+    });
 
-  popup.style.top =
-    (
-      rect.top +
-      rect.height / 2
-    ) + "px";
+    saveAll();
 
-  const icon =
-    document.createElement("div");
-
-  icon.className =
-    "trash-icon";
-
-  icon.textContent =
-    "🗑️";
-
-  popup.appendChild(
-    icon
-  );
-
-  document.body.appendChild(
-    popup
-  );
-
-  setTimeout(
-    function() {
-      popup.remove();
-    },
-    1200
-  );
-}
-
-
-/* TO-DO */
-
-function setTaskDateToday() {
-
-  document.getElementById(
-    "taskDate"
-  ).value =
-    todayString();
-}
-
-function setTaskDateTomorrow() {
-
-  document.getElementById(
-    "taskDate"
-  ).value =
-    tomorrowString();
-}
-
-function addTask() {
-
-  const text =
-    document.getElementById(
-      "taskText"
-    ).value.trim();
-
-  const date =
-    document.getElementById(
-      "taskDate"
-    ).value;
-
-  if (!text) {
-    return;
-  }
-
-  tasks.push({
-    id: Date.now(),
-    text: text,
-    date: date,
-    done: false
-  });
-
-  saveAll();
-
-  document.getElementById(
-    "taskText"
-  ).value = "";
-
-  document.getElementById(
-    "taskDate"
-  ).value = "";
-
-  document.getElementById(
-    "todoForm"
-  ).classList.remove("open");
-
-  document.getElementById(
-    "todoAddButton"
-  ).textContent =
-    "+ Add To-Do";
-
-  renderAll();
-}
-
-function toggleTask(id) {
-
-  const item =
-    tasks.find(
-      function(task) {
-        return task.id === id;
-      }
-    );
-
-  if (!item || item.done) {
-    return;
-  }
-
-  const element =
-    findVisibleItem(
-      '[data-task-id="' +
-      id +
-      '"]'
-    );
-
-  createConfettiAtElement(
-    element
-  );
-
-  item.done = true;
-
-  saveAll();
-
-  renderAll();
-}
-
-function deleteTask(id) {
-
-  const element =
-    findVisibleItem(
-      '[data-task-id="' +
-      id +
-      '"]'
-    );
-
-  showTrashAtElement(
-    element
-  );
-
-  setTimeout(
-    function() {
-
-      tasks =
-        tasks.filter(
-          function(task) {
-            return task.id !== id;
-          }
-        );
-
-      saveAll();
-
+    setTimeout(function () {
       renderAll();
-
-    },
-    350
-  );
-}
-
-
-/* HOMEWORK */
-
-function setHomeworkDateToday() {
-
-  document.getElementById(
-    "homeworkDate"
-  ).value =
-    todayString();
-}
-
-function setHomeworkDateTomorrow() {
-
-  document.getElementById(
-    "homeworkDate"
-  ).value =
-    tomorrowString();
-}
-
-function addHomework() {
-
-  const text =
-    document.getElementById(
-      "homeworkText"
-    ).value.trim();
-
-  const className =
-    document.getElementById(
-      "homeworkClass"
-    ).value.trim();
-
-  const date =
-    document.getElementById(
-      "homeworkDate"
-    ).value;
-
-  const priority =
-    document.getElementById(
-      "homeworkPriority"
-    ).value;
-
-  if (!text) {
-    return;
+    }, 200);
   }
 
-  homework.push({
-    id: Date.now(),
-    text: text,
-    className: className,
-    date: date,
-    priority: priority,
-    done: false
-  });
 
-  saveAll();
+  function renderTasks() {
+    const list = document.getElementById("tasksList");
 
-  document.getElementById(
-    "homeworkText"
-  ).value = "";
+    if (tasks.length === 0) {
+      list.innerHTML =
+        '<div class="empty">No To-Do\'s Yet</div>';
+      return;
+    }
 
-  document.getElementById(
-    "homeworkClass"
-  ).value = "";
+    list.innerHTML = tasks.map(function (task) {
 
-  document.getElementById(
-    "homeworkDate"
-  ).value = "";
+      return `
+        <div
+          class="item ${task.done ? "completed" : ""}"
+          data-task-id="${task.id}"
+        >
+          <div class="item-row">
 
-  document.getElementById(
-    "homeworkForm"
-  ).classList.remove("open");
+            <input
+              type="checkbox"
+              ${task.done ? "checked" : ""}
+              onchange="toggleTask(${task.id})"
+            >
 
-  document.getElementById(
-    "homeworkAddButton"
-  ).textContent =
-    "+ Add Homework";
+            <div class="item-content">
+              <div class="item-title">
+                ${escapeHTML(task.text)}
+              </div>
 
-  renderAll();
-}
+              <div class="item-details">
+                ${task.date ? "Due: " + formatDate(task.date) : "No due date"}
+              </div>
+            </div>
 
-function toggleHomework(id) {
+          </div>
 
-  const item =
-    homework.find(
-      function(hw) {
-        return hw.id === id;
-      }
-    );
+          <button
+            class="delete-button"
+            onclick="deleteTask(${task.id})"
+          >
+            Delete
+          </button>
+        </div>
+      `;
 
-  if (!item || item.done) {
-    return;
+    }).join("");
   }
 
-  const element =
-    findVisibleItem(
-      '[data-homework-id="' +
-      id +
-      '"]'
-    );
 
-  createConfettiAtElement(
-    element
-  );
+  /* =========================
+     HOMEWORK
+  ========================= */
 
-  item.done = true;
+  function addHomework() {
+    const assignment =
+      document.getElementById("homeworkAssignment").value.trim();
 
-  saveAll();
+    const className =
+      document.getElementById("homeworkClass").value.trim();
 
-  renderAll();
-}
+    const date =
+      document.getElementById("homeworkDate").value;
 
-function deleteHomework(id) {
+    const priority =
+      document.getElementById("homeworkPriority").value;
 
-  const element =
-    findVisibleItem(
-      '[data-homework-id="' +
-      id +
-      '"]'
-    );
+    if (!assignment) return;
 
-  showTrashAtElement(
-    element
-  );
+    homework.push({
+      id: Date.now(),
+      assignment: assignment,
+      className: className,
+      date: date,
+      priority: priority,
+      done: false
+    });
 
-  setTimeout(
-    function() {
+    saveAll();
 
-      homework =
-        homework.filter(
-          function(hw) {
-            return hw.id !== id;
-          }
-        );
+    document.getElementById("homeworkAssignment").value = "";
+    document.getElementById("homeworkClass").value = "";
+    document.getElementById("homeworkDate").value = "";
+    document.getElementById("homeworkPriority").value = "Medium";
 
-      saveAll();
+    document.getElementById("homeworkForm").classList.remove("open");
+    document.getElementById("homeworkToggle").textContent =
+      "+ Add Homework";
 
+    renderAll();
+  }
+
+
+  function toggleHomework(id) {
+    const item = homework.find(function (entry) {
+      return entry.id === id;
+    });
+
+    if (!item) return;
+
+    if (!item.done) {
+      const element =
+        findVisibleItem('[data-homework-id="' + id + '"]');
+
+      createConfettiAtElement(element);
+    }
+
+    item.done = !item.done;
+
+    saveAll();
+    renderAll();
+  }
+
+
+  function deleteHomework(id) {
+    const element =
+      findVisibleItem('[data-homework-id="' + id + '"]');
+
+    showTrashAtElement(element);
+
+    homework = homework.filter(function (item) {
+      return item.id !== id;
+    });
+
+    saveAll();
+
+    setTimeout(function () {
       renderAll();
-
-    },
-    350
-  );
-}
-
-
-/* WORK */
-
-function setWorkDateToday() {
-
-  document.getElementById(
-    "workDate"
-  ).value =
-    todayString();
-}
-
-function setWorkDateTomorrow() {
-
-  document.getElementById(
-    "workDate"
-  ).value =
-    tomorrowString();
-}
-
-function addWork() {
-
-  const text =
-    document.getElementById(
-      "workText"
-    ).value.trim();
-
-  const location =
-    document.getElementById(
-      "workLocation"
-    ).value.trim();
-
-  const date =
-    document.getElementById(
-      "workDate"
-    ).value;
-
-  const start =
-    document.getElementById(
-      "workStart"
-    ).value;
-
-  const end =
-    document.getElementById(
-      "workEnd"
-    ).value;
-
-  if (!text) {
-    return;
+    }, 200);
   }
 
-  work.push({
-    id: Date.now(),
-    text: text,
-    location: location,
-    date: date,
-    start: start,
-    end: end,
-    done: false
-  });
 
-  saveAll();
+  function renderHomework() {
+    const list =
+      document.getElementById("homeworkList");
 
-  document.getElementById(
-    "workText"
-  ).value = "";
+    if (homework.length === 0) {
+      list.innerHTML =
+        '<div class="empty">No Homework Yet</div>';
+      return;
+    }
 
-  document.g
+    list.innerHTML = homework.map(function (item) {
+
+      return `
+        <div
+          class="item ${item.done ? "completed" : ""}"
+          data-homework-id="${item.id}"
+        >
+
+          <div class="item-row">
+
+            <input
+              type="checkbox"
+              ${item.done ? "checked" : ""}
+              onchange="toggleHomework(${item.id})"
+            >
+
+            <div class="item-content">
+
+              <div class="item-title">
+                ${escapeHTML(item.assignment)}
+              </div>
+
+              <div class="item-details">
+                ${item.className
+                  ? escapeHTML(item.className) + " • "
+                  : ""}
+                ${item.date
+                  ? "Due: " + formatDate(item.date)
+                  : "No due date"}
+                <br>
+                Priority: ${escapeHTML(item.priority)}
+              </div>
+
+            </div>
+
+          </div>
+
+          <button
+            class="delete-button"
+            onclick="deleteHomework(${item.id})"
+          >
+            Delete
+          </button>
+
+        </div>
+      `;
+
+    }).join("");
+  }
+
+
+  /* =========================
+     WORK
+  ========================= */
+
+  function addWork() {
+    const name =
+      document.getElementById("workName").value.trim();
+
+    const location =
+      document.getElementById("workLocation").value.trim();
+
+    const date =
+      document.getElementById("workDate").value;
+
+    const start =
+      document.getElementById("workStart").value;
+
+    const end =
+    
