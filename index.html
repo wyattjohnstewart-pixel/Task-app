@@ -1064,4 +1064,649 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("workStart").value;
 
     const end =
-    
+      document.getElementById("workEnd").value;
+
+    if (!name) return;
+
+    work.push({
+      id: Date.now(),
+      name: name,
+      location: location,
+      date: date,
+      start: start,
+      end: end,
+      done: false
+    });
+
+    saveAll();
+
+    document.getElementById("workName").value = "";
+    document.getElementById("workLocation").value = "";
+    document.getElementById("workDate").value = "";
+    document.getElementById("workStart").value = "";
+    document.getElementById("workEnd").value = "";
+
+    document.getElementById("workForm").classList.remove("open");
+    document.getElementById("workToggle").textContent =
+      "+ Add Work";
+
+    renderAll();
+  }
+
+
+  function toggleWork(id) {
+    const item = work.find(function (entry) {
+      return entry.id === id;
+    });
+
+    if (!item) return;
+
+    if (!item.done) {
+      const element =
+        findVisibleItem('[data-work-id="' + id + '"]');
+
+      createConfettiAtElement(element);
+    }
+
+    item.done = !item.done;
+
+    saveAll();
+    renderAll();
+  }
+
+
+  function deleteWork(id) {
+    const element =
+      findVisibleItem('[data-work-id="' + id + '"]');
+
+    showTrashAtElement(element);
+
+    work = work.filter(function (item) {
+      return item.id !== id;
+    });
+
+    saveAll();
+
+    setTimeout(function () {
+      renderAll();
+    }, 200);
+  }
+
+
+  function renderWork() {
+    const list =
+      document.getElementById("workList");
+
+    if (work.length === 0) {
+      list.innerHTML =
+        '<div class="empty">No Work Yet</div>';
+      return;
+    }
+
+    list.innerHTML = work.map(function (item) {
+
+      return `
+        <div
+          class="item ${item.done ? "completed" : ""}"
+          data-work-id="${item.id}"
+        >
+
+          <div class="item-row">
+
+            <input
+              type="checkbox"
+              ${item.done ? "checked" : ""}
+              onchange="toggleWork(${item.id})"
+            >
+
+            <div class="item-content">
+
+              <div class="item-title">
+                ${escapeHTML(item.name)}
+              </div>
+
+              <div class="item-details">
+                ${item.location
+                  ? escapeHTML(item.location) + "<br>"
+                  : ""}
+                ${item.date
+                  ? formatDate(item.date)
+                  : "No date"}
+                ${item.start || item.end
+                  ? "<br>" +
+                    (item.start
+                      ? formatTime(item.start)
+                      : "") +
+                    (item.start && item.end ? " – " : "") +
+                    (item.end
+                      ? formatTime(item.end)
+                      : "")
+                  : ""}
+              </div>
+
+            </div>
+
+          </div>
+
+          <button
+            class="delete-button"
+            onclick="deleteWork(${item.id})"
+          >
+            Delete
+          </button>
+
+        </div>
+      `;
+
+    }).join("");
+  }
+
+
+  /* =========================
+     HOME RENDER
+  ========================= */
+
+  function renderHome() {
+
+    const homeTasks =
+      document.getElementById("homeTasks");
+
+    const unfinishedTasks =
+      tasks.filter(function (item) {
+        return !item.done;
+      });
+
+    if (unfinishedTasks.length === 0) {
+      homeTasks.innerHTML =
+        '<div class="empty">No unfinished To-Do\'s</div>';
+    } else {
+      homeTasks.innerHTML =
+        unfinishedTasks.map(function (task) {
+
+          return `
+            <div
+              class="item"
+              data-task-id="${task.id}"
+            >
+
+              <div class="item-row">
+
+                <input
+                  type="checkbox"
+                  onchange="toggleTask(${task.id})"
+                >
+
+                <div class="item-content">
+                  <div class="item-title">
+                    ${escapeHTML(task.text)}
+                  </div>
+
+                  <div class="item-details">
+                    ${task.date
+                      ? "Due: " + formatDate(task.date)
+                      : "No due date"}
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          `;
+
+        }).join("");
+    }
+
+
+    const homeHomework =
+      document.getElementById("homeHomework");
+
+    const unfinishedHomework =
+      homework.filter(function (item) {
+        return !item.done;
+      });
+
+    if (unfinishedHomework.length === 0) {
+      homeHomework.innerHTML =
+        '<div class="empty">No unfinished Homework</div>';
+    } else {
+      homeHomework.innerHTML =
+        unfinishedHomework.map(function (item) {
+
+          return `
+            <div
+              class="item"
+              data-homework-id="${item.id}"
+            >
+
+              <div class="item-row">
+
+                <input
+                  type="checkbox"
+                  onchange="toggleHomework(${item.id})"
+                >
+
+                <div class="item-content">
+
+                  <div class="item-title">
+                    ${escapeHTML(item.assignment)}
+                  </div>
+
+                  <div class="item-details">
+                    ${item.className
+                      ? escapeHTML(item.className) + " • "
+                      : ""}
+                    ${item.date
+                      ? "Due: " + formatDate(item.date)
+                      : "No due date"}
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          `;
+
+        }).join("");
+    }
+
+
+    const homeWork =
+      document.getElementById("homeWork");
+
+    const unfinishedWork =
+      work.filter(function (item) {
+        return !item.done;
+      });
+
+    if (unfinishedWork.length === 0) {
+      homeWork.innerHTML =
+        '<div class="empty">No unfinished Work</div>';
+    } else {
+      homeWork.innerHTML =
+        unfinishedWork.map(function (item) {
+
+          return `
+            <div
+              class="item"
+              data-work-id="${item.id}"
+            >
+
+              <div class="item-row">
+
+                <input
+                  type="checkbox"
+                  onchange="toggleWork(${item.id})"
+                >
+
+                <div class="item-content">
+
+                  <div class="item-title">
+                    ${escapeHTML(item.name)}
+                  </div>
+
+                  <div class="item-details">
+                    ${item.location
+                      ? escapeHTML(item.location) + "<br>"
+                      : ""}
+                    ${item.date
+                      ? formatDate(item.date)
+                      : "No date"}
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          `;
+
+        }).join("");
+    }
+  }
+
+
+  /* =========================
+     MONEY
+  ========================= */
+
+  function addTransaction() {
+
+    const amount =
+      Number(document.getElementById("transactionAmount").value);
+
+    const type =
+      document.getElementById("transactionType").value;
+
+    const description =
+      document.getElementById("transactionDescription")
+        .value.trim();
+
+    if (!amount) return;
+
+    if (type === "income") {
+      balance += amount;
+    } else {
+      balance -= amount;
+    }
+
+    transactions.unshift({
+      id: Date.now(),
+      amount: amount,
+      type: type,
+      description: description
+    });
+
+    saveAll();
+
+    document.getElementById("transactionAmount").value = "";
+    document.getElementById("transactionDescription").value = "";
+
+    document.getElementById("transactionForm")
+      .classList.remove("open");
+
+    document.getElementById("transactionToggle")
+      .textContent = "+ Transaction";
+
+    renderMoney();
+  }
+
+
+  function renderMoney() {
+
+    document.getElementById("balanceDisplay")
+      .textContent =
+      "$" + balance.toFixed(2);
+
+
+    const list =
+      document.getElementById("transactionsList");
+
+    if (transactions.length === 0) {
+      list.innerHTML =
+        '<div class="empty">No Transactions Yet</div>';
+      return;
+    }
+
+    list.innerHTML =
+      transactions.map(function (transaction) {
+
+        const sign =
+          transaction.type === "income"
+            ? "+"
+            : "-";
+
+        const className =
+          transaction.type === "income"
+            ? "money-in"
+            : "money-out";
+
+        return `
+          <div class="transaction">
+
+            <div class="transaction-description">
+              ${escapeHTML(
+                transaction.description || "Transaction"
+              )}
+            </div>
+
+            <div class="transaction-meta ${className}">
+              ${sign}$${transaction.amount.toFixed(2)}
+            </div>
+
+          </div>
+        `;
+
+      }).join("");
+  }
+
+
+  /* =========================
+     ESCAPE HTML
+  ========================= */
+
+  function escapeHTML(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  /* =========================
+     FORM TOGGLES
+  ========================= */
+
+  document.getElementById("todoToggle")
+    .addEventListener("click", function () {
+
+      const form =
+        document.getElementById("todoForm");
+
+      form.classList.toggle("open");
+
+      this.textContent =
+        form.classList.contains("open")
+          ? "− Close To-Do"
+          : "+ Add To-Do";
+    });
+
+
+  document.getElementById("homeworkToggle")
+    .addEventListener("click", function () {
+
+      const form =
+        document.getElementById("homeworkForm");
+
+      form.classList.toggle("open");
+
+      this.textContent =
+        form.classList.contains("open")
+          ? "− Close Homework"
+          : "+ Add Homework";
+    });
+
+
+  document.getElementById("workToggle")
+    .addEventListener("click", function () {
+
+      const form =
+        document.getElementById("workForm");
+
+      form.classList.toggle("open");
+
+      this.textContent =
+        form.classList.contains("open")
+          ? "− Close Work"
+          : "+ Add Work";
+    });
+
+
+  /* =========================
+     DATE PRESETS
+  ========================= */
+
+  document.getElementById("todoToday")
+    .addEventListener("click", function () {
+      document.getElementById("todoDate").value =
+        getDateString(0);
+    });
+
+  document.getElementById("todoTomorrow")
+    .addEventListener("click", function () {
+      document.getElementById("todoDate").value =
+        getDateString(1);
+    });
+
+
+  document.getElementById("homeworkToday")
+    .addEventListener("click", function () {
+      document.getElementById("homeworkDate").value =
+        getDateString(0);
+    });
+
+  document.getElementById("homeworkTomorrow")
+    .addEventListener("click", function () {
+      document.getElementById("homeworkDate").value =
+        getDateString(1);
+    });
+
+
+  document.getElementById("workToday")
+    .addEventListener("click", function () {
+      document.getElementById("workDate").value =
+        getDateString(0);
+    });
+
+  document.getElementById("workTomorrow")
+    .addEventListener("click", function () {
+      document.getElementById("workDate").value =
+        getDateString(1);
+    });
+
+
+  /* =========================
+     SAVE BUTTONS
+  ========================= */
+
+  document.getElementById("todoSave")
+    .addEventListener("click", addTask);
+
+  document.getElementById("homeworkSave")
+    .addEventListener("click", addHomework);
+
+  document.getElementById("workSave")
+    .addEventListener("click", addWork);
+
+  document.getElementById("transactionSave")
+    .addEventListener("click", addTransaction);
+
+
+  /* =========================
+     MONEY DROPDOWNS
+  ========================= */
+
+  document.getElementById("balanceToggle")
+    .addEventListener("click", function () {
+
+      const dropdown =
+        document.getElementById("balanceDropdown");
+
+      dropdown.classList.toggle("open");
+    });
+
+
+  document.getElementById("transactionToggle")
+    .addEventListener("click", function () {
+
+      const dropdown =
+        document.getElementById("transactionForm");
+
+      dropdown.classList.toggle("open");
+
+      this.textContent =
+        dropdown.classList.contains("open")
+          ? "− Close Transaction"
+          : "+ Transaction";
+    });
+
+
+  document.getElementById("historyToggle")
+    .addEventListener("click", function () {
+
+      const dropdown =
+        document.getElementById("historyDropdown");
+
+      dropdown.classList.toggle("open");
+
+      this.textContent =
+        dropdown.classList.contains("open")
+          ? "− Transaction History"
+          : "Transaction History";
+    });
+
+
+  /* =========================
+     TAB NAVIGATION
+     ========================= */
+
+  const tabButtons =
+    document.querySelectorAll(".tab-button");
+
+  const pages =
+    document.querySelectorAll(".page");
+
+
+  tabButtons.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+      const pageName =
+        button.getAttribute("data-page");
+
+      pages.forEach(function (page) {
+        page.classList.remove("active");
+      });
+
+      const selectedPage =
+        document.getElementById(pageName);
+
+      if (selectedPage) {
+        selectedPage.classList.add("active");
+      }
+
+      tabButtons.forEach(function (tab) {
+        tab.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      renderAll();
+
+      window.scrollTo(0, 0);
+    });
+
+  });
+
+
+  /* =========================
+     RENDER EVERYTHING
+  ========================= */
+
+  function renderAll() {
+    renderHome();
+    renderTasks();
+    renderHomework();
+    renderWork();
+    renderMoney();
+  }
+
+
+  /* =========================
+     MAKE FUNCTIONS AVAILABLE
+     TO CHECKBOXES / BUTTONS
+  ========================= */
+
+  window.toggleTask = toggleTask;
+  window.deleteTask = deleteTask;
+
+  window.toggleHomework = toggleHomework;
+  window.deleteHomework = deleteHomework;
+
+  window.toggleWork = toggleWork;
+  window.deleteWork = deleteWork;
+
+
+  /* =========================
+     START APP
+  ========================= */
+
+  renderAll();
+
+});
+</script>
+
+</body>
+</html>
